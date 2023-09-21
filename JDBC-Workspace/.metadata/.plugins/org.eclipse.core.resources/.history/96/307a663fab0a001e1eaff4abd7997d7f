@@ -1,0 +1,68 @@
+package com.kh.model.vo;
+
+import java.sql.Date;
+
+/* 
+ * 
+ * VO(Value Object)
+ * DB 테이블의 한 행에 대한 데이터를 기록할수 있는 저장용 객체.
+ * 
+ * */
+
+public class Member {
+	private int userNo; // USERNO NUMBER
+	private String userId;// USERID VARCHAR2(15 BYTE)
+	private String userPwd;// USERPWD VARCHAR2(20 BYTE)
+	private String userName;// USERNAME VARCHAR2(20 BYTE)
+	private String gender; // GENDER CHAR(1 BYTE)
+	private int age; // AGE NUMBER
+	private String email; // EMAIL VARCHAR2(30 BYTE)
+	private String phone; // PHONE CHAR(11 BYTE)
+	private String address; // ADDRESS VARCHAR2(100 BYTE)
+	private String hobby; // HOBBY VARCHAR2(50 BYTE)
+	private Date enrollDate;// ENROLLDATE DATE
+							// java.sql.Date로 import하기
+
+	public Member() {
+
+	}
+
+	public Member(int userNo, String userId, String userPwd, String userName, String gender, int age, String email,
+			String phone, String address, String hobby, Date enrollDate) {
+		super();
+		this.userNo = userNo;
+		this.userId = userId;
+		this.userPwd = userPwd;
+		this.userName = userName;
+		this.gender = gender;
+		this.age = age;
+		this.email = email;
+		this.phone = phone;
+		this.address = address;
+		this.hobby = hobby;
+		this.enrollDate = enrollDate;
+	}
+	// 회원 추가용 생성자 => userNo, enrollDate필드 빼고 초기화 할수 있게끔.
+	public Member(String userId, String userPwd, String userName, String gender, int age, String email, String phone,
+			String address, String hobby) {
+		super();
+		this.userId = userId;
+		this.userPwd = userPwd;
+		this.userName = userName;
+		this.gender = gender;
+		this.age = age;
+		this.email = email;
+		this.phone = phone;
+		this.address = address;
+		this.hobby = hobby;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+
+}

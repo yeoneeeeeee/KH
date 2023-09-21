@@ -1,0 +1,11 @@
+package com.kh.opendata;
+
+import org.springframework.web.bind.annotation.RestController;
+
+
+@RestController
+public class APIController {
+	
+	public static final String serviceKey = "q05Y%2BfrAfBxfZ2wxYJmcTZiDojO1LpTHdVf0n1xyRKmCRED3xTqbOG8VFzFeP3SsbVncyQWcYF68xncwTrumxw%3D%3D";
+	
+}

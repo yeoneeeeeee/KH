@@ -1,0 +1,7 @@
+package com.kh.springboot.menu.model.service;
+
+
+@Service
+public class MenuServiceImpl {
+
+}

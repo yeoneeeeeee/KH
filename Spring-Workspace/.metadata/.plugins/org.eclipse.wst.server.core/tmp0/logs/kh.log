@@ -1,0 +1,5 @@
+INFO :[14:03:21.616] ContextLoader.initWebApplicationContext(ContextLoader.java:271) - Root WebApplicationContext: initialization started
+INFO :[14:03:22.860] ContextLoader.initWebApplicationContext(ContextLoader.java:307) - Root WebApplicationContext initialized in 1238 ms
+INFO :[14:03:22.931] FrameworkServlet.initServletBean(FrameworkServlet.java:525) - Initializing Servlet 'appServlet'
+INFO :[14:03:24.458] FrameworkServlet.initServletBean(FrameworkServlet.java:547) - Completed initialization in 1527 ms
+INFO :[14:04:26.300] MemberController.loginMember(MemberController.java:225) - 찍어보자구 Member(userNo=0, userId=mkm2, userPwd=1234, userName=null, email=null, phone=null, address=null, interest=null, enrollDate=null, modifyDate=null, status=null, gender=null, birthday=null, enable=false) , Member(userNo=0, userId=mkm2, userPwd=1234, userName=null, email=null, phone=null, address=null, interest=null, enrollDate=null, modifyDate=null, status=null, gender=null, birthday=null, enable=false)

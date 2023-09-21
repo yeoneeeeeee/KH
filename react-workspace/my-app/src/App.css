@@ -1,0 +1,14 @@
+div{
+  background-color: pink;
+  color: black;
+  padding:40px;
+  font-family: 고딕;
+  text-align: center;
+}
+
+h1{
+  color: white;
+  background-color: darkorchid;
+  padding: 10px;
+  font-family: "Noto Sans KR", sans-serif;
+}

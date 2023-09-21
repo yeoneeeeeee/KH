@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배열</title>
+    <link href="resources/css/common.css" rel="stylesheet">
+</head>
+<body>
+    <h1>배열</h1>
+
+    <p>
+        자바스크립트에서는 변수 선언 시 별도의 자료형 지정이 없기때문에 <br>
+        어떤 자료형의 값들이던 다 하나의 배열공간에 담을수 있음(자바의 컬렉션과유사)
+    </p>
+
+    <button onclick="arrayTest1();">확인하기</button>
+
+    <div id="area1" class="area small"></div>
+
+    <script>
+        function arrayTest1(){
+            const arr = ["민경민",'서울' ,36 , true ,[1,2,3]]; // 배열객체
+
+            console.log(arr);
+            console.log(arr[2]);
+            console.log(arr[4][0]); // [1,2,3]
+
+            const area1 = document.getElementById("area1");
+
+            // 배열의 0번인덱스에서 마지막인덱스까지 순차적으로 모두 접근할 목적이라면
+            // 향상된 반복문 사용하기 (for of 문)
+            // for(let 변수명 of 순차적으로 접근할 배열)
+            for(let item of arr){
+                area1.innerHTML += item+"<br>";
+            }
+        }
+    </script>
+
+    <hr>
+    <h3>* 배열의 선언</h3>
+    <p>
+        배열 선언시 배열의 크기를 지정한채로 선언하거나, 크기를 지정하지 않아도 됨
+        (배열 의 크기에 제약이 없다)
+    </p>
+
+    <button onclick="arrayTest2();">확인하기</button>
+    <script>
+        function arrayTest2(){
+
+            let arr1 = new Array(); // 배열의 크기가 0인 빈 배열
+            let arr2 = new Array(3); // 배열의 크기가 3인 빈 배열
+            let arr3 = [];// 배열의 크기가 0인 빈 배열(권장하는 배열 생성 방식)
+
+            console.log(arr1);
+            console.log(arr2);
+            console.log(arr3);
+
+            // 배열에 값 대입하는 방법
+            arr1[0] = "바나나";
+            arr1[1]  = "키위";
+            arr1[10] = "삼겹살";// 배열의 크기가 11로 늘어났다.[2]~[9]까진 비어있는상태
+            console.log(arr1);
+
+            // 배열의 선언과 동시에 초기화하기
+            const arr4 = new Array("홍길동","이순신");
+            const arr5 = ["java","html","css"];
+
+            console.log(arr4, arr5);
+        }
+    </script>
+
+    <hr>
+
+    <h3> * Array 객체의 메소드</h3>
+
+    <h4>1) indexOf(찾고자하는요소) : 배열에서 해당 요소가 위치해있는 인덱스를 반환</h4>
+
+    <div id="area2" class="area small"></div>
+
+    <button onclick="indexOfTest();">확인하기</button>
+
+    <script>
+        function indexOfTest(){
+            const area2 = document.getElementById("area2");
+
+            const arr = ["사과","딸기","바나나","복숭아","파인애플"];
+            const fruit = prompt("찾고자 하는 과일명을 입력하시오");
+
+            const index = arr.indexOf(fruit);
+            // 배열에 존재하지 않는 요소를 제시한다면 -1이 반환, 존재한다면 요소가존재하는 인덱스 위치를 반환
+
+            console.log(index);
+
+            // 있을 경우 : 당신이 찾는 과일 xxx는 x번째 위치에 있습니다
+            // 없을 경우 : 당신이 찾는 과인 xxx는 판매하지 않습니다
+            // 출력위치 : id값이 area2인요소 내부컨텐츠 영역에 출력할것
+            if(index == -1){
+                area2.innerHTML = `당신이 찾는 과일 ${fruit}는 판매하지 않습니다`;
+            }else{
+                area2.innerHTML = `당신이 찾는 과일 ${fruit}는 ${index}번째 위치에 있습니다`;
+            }
+        }
+    </script>
+
+    <hr>
+
+    <h4>2) concat(배열, 배열,...) : 여러개의 배열을 결합하고자 할 때 사용</h4>
+
+    <div id="area3" class="area big"></div>
+    <button onclick="concatTest();">확인</button>
+
+    <script>
+        function concatTest(){
+
+            const area3 = document.getElementById("area3");
+
+            const arr1 = ["사과","딸기"];
+            const arr2 = ["핸드폰","전자레인지","냉장고"];
+
+            area3.innerHTML += `arr1 : ${arr1}<br>`;
+            area3.innerHTML += `arr2 : ${arr2}<br>`;
+
+            area3.innerHTML += `arr1기준으로 배열 합침 : ${arr1.concat(arr2)}<br>`;
+            area3.innerHTML += `arr1 : ${arr1}<br>`;
+            // 원본 배열에 영향을 끼치지 않는 메소드
+            // 두개의 배여을 합쳐서 새로운 배열로 반환
+
+            area3.innerHTML += "여러개의 배열을 합치기 : "+arr1.concat(arr2, [1,2,3],["히히"]);
+        }
+    </script>
+
+    <hr>
+
+    <h4>3) reverse() : 배열에 담긴 값들을 역순으로 바꿔주는 메소드</h4>
+    <div id="area4" class="area small"></div>
+    <button onclick="reverseTest();">확인</button>
+
+    <script>
+        function reverseTest(){
+            const area4 = document.getElementById("area4");
+
+            const arr = [1,2,3,4,5];
+
+            area4.innerHTML +=  "arr : "+arr+"<br>";
+            area4.innerHTML +=  "reverse()호출시 : "+arr.reverse()+"<br>";
+            area4.innerHTML +=  "원본 arr : "+arr+"<br>";
+            //원본배열에 영향을 끼치는 메서드
+        }
+    </script>
+
+    <h4>4) sort() : 배열안에 담긴 값들을 오름차순으로 정렬시켜주는 메서드</h4>
+    <div id="area5" class="area small"></div>
+    <button onclick="sortTest()">확인</button>
+
+    <script>
+        function sortTest(){
+            const area5 = document.getElementById("area5");
+    
+            const arr = ["민경민","가경민","다경민","라경민","나경민"];
+
+            area5.innerHTML += `arr : ${arr}<br>`;
+            area5.innerHTML += `sort결과 : ${arr.sort()}<br>`;
+            area5.innerHTML += `원본 arr : ${arr}<br>`;
+            // 원본 배열에 영향을 끼침
+
+            // 내림차순으로 바꿔서 정렬하고 싶다면? 오름차순정렬 후 역순으로 뒤집기(reverse)
+            area5.innerHTML += `내림차순정렬 : ${arr.sort().reverse()}<br>`;
+
+            // 특이케이스
+            const arr2 = [1 , 2, 15, 25];// 1 2 15 25
+            console.log(arr2.sort());
+            // sort시 내부요소를 문자열로 취급하여 정렬하기 때문에 문자열 기준 오름차순 정렬이 되어버린다.
+            // "2" > "15" true
+
+            // 기존 정렬기준대신 새로운 정렬기준을 만들고 싶은 경우
+            // 1) 정렬기준을 새로만들기
+            function compare(a,b){
+                if(a > b){
+                    return 1;
+                }
+                else if( a == b){
+                    return 0;
+                }else{
+                    return -1;
+                }
+            }
+            //2) sort매서드의 매개변수로 내가 만든 정렬기준을 추가
+            console.log(arr2.sort(compare));
+
+            //2_1) 그 외 방법
+            console.log(arr2.sort( function (a,b) { return a-b; } ));
+            // 양수 반환하는 경우는 크다, 음수 반환하는하는 경우 작다로 해석해서 정렬
+
+            //화살표함수
+            console.log(arr2.sort( (a , b) => a-b ))
+        }
+    </script>
+
+    <hr>
+
+    <h4>
+        5_1) push(추가할 요소) : 배열의 맨 뒤에 요소를 추가하고 배열의 크기를 반환<br>
+        5_2) pop() : 배열의 맨 뒤 요소를 제거하고 제거된 요소를 반환
+    </h4>
+
+    <div id="area6" class="area big"></div>
+    <button onclick="pushPopTest();">확인</button>
+
+    <script>
+        function pushPopTest(){
+            const area6 = document.getElementById("area6");
+
+            const arr = ["서초동","방대동","역삼동","삼성동","대치동"];
+
+            area6.innerHTML += `arr : ${arr}<br>`;
+            arr.push("신사동");
+            area6.innerHTML += `arr에 push후 : ${arr}<br>`;
+            area6.innerHTML += `arr에 push후 배열의 크기 : ${arr.push("논현동")}<br>`;
+            area6.innerHTML += `원본 arr : ${arr}<br>`;
+
+            area6.innerHTML += `arr에 pop 후 : ${arr.pop()}<br>`;
+            area6.innerHTML += `원본 arr : ${arr}<br>`;
+
+            // 둘다 원본배열에 영향을 끼친다.
+            arr.pop();
+            arr.pop();
+            arr.pop();
+
+            arr.length = 0;//배열안의 데이터를 모두 날리는 방법
+
+            area6.innerHTML += `원본 arr : ${arr}<br>`;
+
+
+        }
+    </script>
+
+    <hr>
+
+    <h4>
+        6_1) unshift(추가할 요소) : 배열의 맨 앞에 요소 추가 후 배열의 크기 반환
+        6_2) shift() : 배열의 맨 앞에 요소를 제거하고, 제거된 요소를 반환
+    </h4>
+    
+    <div id="area7" class="area big"></div>
+    <button onclick="shiftUnshiftTest();">확인</button>
+
+    <script>
+        function shiftUnshiftTest(){
+            const area7 = document.getElementById("area7");
+
+            const arr = ["야구","볼링","테니스","탁구"];
+
+            area7.innerHTML += "arr : "+arr+"<br>";
+            arr.unshift("당구");// 배열의 길이만큼 반복문을 돌림
+            area7.innerHTML += "arr에 unshift 후 : "+arr+"<br>";
+            area7.innerHTML += "arr에 unshift 후 배열의 크기: "+arr.unshift("포켓볼")+"<br>";
+            area7.innerHTML += "arr : "+arr+"<br>";
+
+            area7.innerHTML += `arr에 shift 후 : ${arr.shift()}<br>`;
+            area7.innerHTML += "arr : "+arr+"<br>";
+        }
+    </script>
+
+    <h4>
+        7_1) slice(시작 , 끝) : 배열 안의 요소들을 추출해주는 메소드(원본배열에 영향을 끼치지 않음)<br>
+        7_2) splice(시작, 제거수, 추가값) : 배열의 요소를 추출해서 제거 및 추가, 추가값은 생략 가능
+    </h4>
+
+    <div id="area8" class="area small"></div>
+    <button onclick="sliceSpliceTest()">확인</button>
+
+    <script>
+        function sliceSpliceTest(){
+            const area8 = document.getElementById("area8");
+
+            const arr = ["자바"  ,  "오라클",  "html", "css", "js"];
+
+            area8.innerHTML += "arr : "+arr+"<br>";
+            // slice(시작인덱스, 끝인덱스) => 끝인덱스는 포함하지 않습니다.
+            area8.innerHTML += `slice 결과 : ${arr.slice(2,4)}<br>`
+            area8.innerHTML += "원본 arr : "+arr+"<br>";
+            // 원본배열에 영향을 끼치는 메소드가 아님
+
+            // splice(시작인덱스, 제거수, 추가할요소)
+            area8.innerHTML += `splice 결과 : ${arr.splice(2, 3,["react","react2","react3"])}<br>`;
+            area8.innerHTML += "원본 arr : "+arr+"<br>";
+            // 원본배열에 영향을 끼치는 메서드
+        }
+    </script>
+
+    <hr>
+
+    <h4>8) join([구분자]) / toString() : 배열에 담긴 값들을 하나의 "문자열"로 합쳐서 반환</h4>
+
+    <div id="area9" class="area small"></div>
+    <button onclick="toStringJoinTest();">확인</button>
+
+    <script>
+        function toStringJoinTest(){
+            const area9 = getById("area9");
+
+            const arr = ["나는", "오늘부터" , "다이어트를", "시작하겠다!!"];
+
+            area9.innerHTML += `arr : ${arr}<br>`;
+            area9.innerHTML += `toString : ${arr.toString()}<br>`;
+            // 배열객체를 html요소에 출력할 경우 내부적으로 .toString()호출후 돌아온 결과 출력
+
+            area9.innerHTML += `join : ${arr.join() }<br>`;
+            // join은 기본적으로 ,를 통해 하나의 문자열로 합친다면
+            // join메소드 호출 시 구분자 제시시 해당 구분자로 하나의 문자열로 합쳐진다.
+
+            area9.innerHTML += `구분자 제시한 join : ${arr.join(" ") }<br>`;
+        }
+    </script>
+
+    <hr>
+
+    <h4>9) 배열 반복문</h4>
+    <button onclick="loop()">콘솔창을 통해 확인</button>
+    <script>
+
+        function loop(){
+            const arr = ["소금","후추","쌈장","삼겹살"];
+            arr.mkm = "민경민";
+    
+            // 가장 기본적인 반복문
+            for(let i = 0; i<arr.length; i++){
+                console.log(arr[i]);
+            }
+            //console.log(i);
+            console.log("========================================================");
+            //향상된 반복문 (배열을 반복시킬때 사용하는걸 권장)
+            for( let food of  arr   ){
+                console.log(food);
+            }
+            console.log("========================================================");
+            // 향상된 반복문 (객체를 반복시킬때 사용하는걸 권장)
+            
+            for( let key in arr){
+                console.log(key , arr[key]);
+            }
+    
+            // 배열을 비우는 방법
+    
+            arr.length = 0;
+    
+            const arr2 = [1,2,3,4,5];
+            arr2.length = 2;
+            console.log(arr2);
+        }
+    </script>
+
+    <hr>
+    
+    <h4>9) 배열을 통한 반복작업(foreach)</h4>
+    <button onclick="foreachTest();">콘솔창을통해 확인</button>
+
+    <script>
+        function foreachTest(){
+
+            const a = [1,2,3,4,5];
+
+            // forEach문법 기본 형태
+            a.forEach(  function(item,index,array) {
+                console.log(`${item}은 ${array}의 ${index}에 위치해 있습니다.`);
+            });
+
+            //forEach구문 안에 내가 실행시키고자 하는 이미 정의된 함수를 넣을수도 있음
+            //a.forEach(alert);
+
+            [1,2,3,4,5,6,7].forEach(alert);
+
+            forEachtest(console.log);
+        }
+
+        function forEachtest(callback){
+            callback("잘 되나?");
+        }
+    </script>
+
+    <h4>9) includes</h4>
+
+    <p>
+        일반 자료형으로 이루어진 배열에서 내가원하는값이 있는지 찾을때 사용
+    </p>
+
+    <button onclick="includesTest()">콘솔창을 통해 확인</button>
+
+    <script>
+        function includesTest(){
+            const a = [1,2,3,4,5];
+
+            console.log(a.includes(1)); // 존재할 때
+            console.log(a.includes(999)); // 존재하지 않을 때
+        }
+    </script>
+
+    <h4>10) 배열 탐색(find, filter)</h4>
+    <p>
+        객체로 이루어진 배열에서 내가 원하는 값을 찾고자할때 주로 사용이 된다.
+    </p>
+
+    <button onclick="findAndFilterTest()">콘솔창을 통해 확인</button>
+    <script>
+        function findAndFilterTest(){
+            const mkmArr = [
+                { id : 'alsrudals', name : "경민" },
+                { id : 'alsrudals2', name : "경민2" },
+                { id : 'alsrudals3', name : "경민2" },
+                { id : 'alsrudals4', name : "경민4" },
+                { id : 'alsrudals4', name : "정민" },
+                { id : 'alsrudals4', name : "정민4" },
+                { id : 'alsrudals4', name : "경민33" },
+                { id : 'alsrudals4', name : "정민2" },
+                { id : 'alsrudals4', name : "정민6" },
+            ];
+
+            let mkm;
+            // find의 기본형태 (내가 원하는 요소를 찾은후 return true시 현재 item을 반환시켜주면서 반복종료)
+            //                 (찾고자 하는 값이 없다면 undefined반환)
+            mkm = mkmArr.find( function(item, index){
+                if(item.name == "경민2"){
+                    return true;
+                }
+            })
+            console.log(mkm);
+            let filteredArray;
+            // filter의 기본형태 : 조건을 충족하는 요소가 있으면 해당 요소를 순차적으로 빈배열안에
+            //                    차곡차곡 쌓은후 해당 배열을 반환.(일치하는 데이터가 없다면 빈배열([]) 반환)
+            filteredArray = mkmArr.filter( function(item){
+                if(item.name.includes("경민")){
+                    return true;
+                }
+            });
+            
+            // 요런구조로 filter함수가 정의되어 있음.
+            function filterSample(callback){
+                const emptyArr = [];
+
+                // 반복문 돌리면서 
+                for(let i =0; i<this.length; i++){
+                    if(callback(this[i] , i , this )){
+                        emptyArr.push(this[i]);
+                    }
+                }
+                return emptyArr;
+            }
+            // 화살표 함수로 축약시킴
+            filteredArray = mkmArr.filter( item => item.name.includes("경민"));
+
+            console.log(filteredArray);
+        }
+    </script>
+
+    <h4>10) 배열 변형(map)</h4>
+
+    <p>
+        현재 배열을 바탕으로 각 요소(item)에 함수를 호출하여 결과값을 반환해줌
+    </p>
+    <button onclick="mapTest()">콘솔창을 통해 확인</button>
+
+    <script>
+        function mapTest(){
+            const mkmArr = [
+                { id : 'alsrudals', name : "경민" },
+                { id : 'alsrudals2', name : "경민2" },
+                { id : 'alsrudals3', name : "경민2" },
+                { id : 'alsrudals4', name : "경민4" },
+                { id : 'alsrudals4', name : "정민" },
+                { id : 'alsrudals4', name : "정민4" },
+                { id : 'alsrudals4', name : "경민33" },
+                { id : 'alsrudals4', name : "정민2" },
+                { id : 'alsrudals4', name : "정민6" },
+            ];
+
+            const mapedArr = mkmArr.map(function(item,index){
+                return {id : item.id , index , name : item.name+index };
+            });
+
+            const mapedArr2 = mkmArr.map( (item,index) => new Object());
+
+            console.log(mapedArr2);
+        }
+    </script>
+
+
+
+
+    <script>
+        function getById(id){
+            return document.getElementById(id);
+        }
+    </script>
+</body>
+</html>

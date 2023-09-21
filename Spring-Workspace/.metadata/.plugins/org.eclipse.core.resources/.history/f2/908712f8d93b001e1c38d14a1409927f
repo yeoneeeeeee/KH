@@ -1,0 +1,8 @@
+package com.kh.spring.security.model.dao;
+
+
+
+@Repository
+public class SecurityDao {
+
+}

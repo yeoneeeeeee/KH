@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            border: 1px solid blue;
+            box-sizing: border-box;
+        }
+        /* 임시 스타일 부여*/
+        #nav{
+            width: 1000px;
+            height: 40px;
+        }
+
+        #navi{
+            border:1px solid red;
+            list-style-type: none;
+            margin:0;
+            padding:0;
+            /* 
+                ul요소도 기본적으로 위, 아래에 margin이존재
+                ul요소에 padding도 존재함.
+            */
+            height: 100%;
+        }
+
+        #navi>li{
+            border:1px solid blue;
+            float:left;
+            width:15%;
+            height: 100%;
+            text-align : center;
+        }
+
+        #navi a{
+            border: 1px solid blue;
+            text-decoration: none;
+            color : lightcoral;
+            font-size:13px;
+            font-weight: 900;
+
+            width: 100%;
+            height: 100%;
+            /* a태그는 인라인 요소이기 때문에
+               width, height속성이 적용되지않음 */
+            display: block;
+            /* vertical-align: middle;
+                vertical-align: 블럭요소에서는 사용불가
+            */
+            line-height: 35px;
+        }
+
+        #navi a:hover{
+            color:crimson;
+            font-size: 15px;
+            /* transform: scale(1); 통합시 주석해제 */     
+        }
+
+        #navi>li>ul {
+            list-style-type: none;
+            padding: 0;
+
+            /* 평소에는 안보여지다가 마우스 올라가는 순간
+               펼쳐지는 효과 부여할 예정 */
+            display: none;
+        }
+
+        #navi>li>ul a {font-size: 10px;}
+        #navi>li>ul a:hover {font-size: 13px;}
+
+        #navi>li>a:hover+ul{
+            /* 평소에는 안보여지다가 마우스가 올라가는 순간 펼쳐지
+               는 효과 부여*/
+            display: block;
+        }
+        #navi>li>ul:hover{
+            display:block;
+        }
+    </style>
+</head>
+<body>
+    <div id="nav">
+        <ul id="navi">
+            <li><a href="">Java</a></li>
+            <li><a href="">Oracle</a></li>
+            <li>
+                <a href="">Front-End</a>
+                <ul>
+                    <li><a href="">HTML</a></li>
+                    <li><a href="">CSS</a></li>
+                    <li><a href="">JavaScript</a></li>
+                    <li><a href="">jQuery</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="">Server</a>
+                <ul>
+                    <li><a href="">JDBC</a></li>
+                    <li><a href="">Servlet</a></li>
+                    <li><a href="">JSP</a></li>
+                    <li><a href="">Ajax</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="">Framework</a>
+                <ul>
+                    <li><a href="">MyBatis</a></li>
+                    <li><a href="">Spring</a></li>
+                    <li><a href="">React</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

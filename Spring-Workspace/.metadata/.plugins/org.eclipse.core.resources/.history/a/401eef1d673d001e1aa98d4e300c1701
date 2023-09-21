@@ -1,0 +1,7 @@
+package com.kh.springboot.menu.model.typeHandler;
+
+import org.apache.ibatis.type.BaseTypeHandler;
+
+public class MenuTypeHandler extends BaseTypeHandler<MenuType>{
+
+}

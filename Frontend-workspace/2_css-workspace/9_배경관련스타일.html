@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배경관련스타일</title>
+    <style>
+        body{
+            background-color:skyblue;
+        }
+        #div-bg{
+            background-color: white;
+            border: 30px solid blue;
+            padding : 20px;
+            width:50%;
+            /* 
+                div의 content의 가로길이는 부모요소의 50%만큼 지정하겠다 라는 뜻.
+            */
+            box-sizing: border-box; /* 가로길이를 border까지 포함해서 지정*/
+        }
+
+        .div-test{
+            margin:30px;
+            border:10px dashed;
+            padding:20px;
+            background-color: yellow;
+            /* 배경색이 border까지 확장되어있음을 확인 */
+        }
+
+        #div1{
+            background-clip: border-box;
+        }
+
+        #div2{
+            background-clip: padding-box;
+        }
+
+        #div3{
+            background-clip: content-box;
+        }
+        /* background-clip : 배경을 적용시키고자하는 범위를 지정할때 사용
+                             기본값 : border-box */
+        #bg-img{
+            border : 1px solid black;
+            width: 100%;
+            height: 800px;
+
+            background-image: url("resources/images/bono.jpg");
+            background-repeat: no-repeat;/* 사진들이 세로로만 반복 */
+            background-size:cover; /* 가로세로 상관없이 둘중 하나가 가득찰때까지 크기를 맞춘다*/
+            background-position: 100%;
+            background-attachment: fixed;
+            /* 스크롤 이동이 있어도 그자리 그대로 고정*/
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>배경 관련 스타일(background~~)</h1>
+
+    <h3>background-color : 배경색을 지정하고자 할대 사용</h3>
+    <div id="div-bg">
+        피가 이 넣는 바이며, 그리하였는가? 하였으며, 반짝이는 따뜻한 속에 그들의 기관과 우리 끓는다. 청춘에서만 보내는 방황하여도, 이성은 않는 약동하다. 예가 그것을 같지 때문이다. 별과 있는 이성은 위하여, 못할 가장 인간에 능히 실현에 이것이다. 되는 그들은 위하여, 밝은 청춘에서만 얼음 풀이 이상의 인생을 이것이다. 곳이 이상의 웅대한 듣기만 이상이 갑 싸인 때문이다. 위하여, 피는 장식하는 가치를 뿐이다. 구하기 크고 위하여, 미묘한 고행을 청춘에서만 웅대한 장식하는 두기 운다. 놀이 위하여 찾아 수 가슴에 청춘의 것이다. 없으면, 않는 남는 끓는 그들은 뼈 안고, 있으랴?
+    </div>
+
+
+    <div id="div1" class="div-test">피가 이 넣는 바이며, 그리하였는가? 하였으며, 반짝이는 따뜻한 속에 그들의 기관과 우리 끓는다. 청춘에서만 보내는 방황하여도, 이성은 않는 약동하다. 예가 그것을 같지 때문이다. 별과 있는 이성은 위하여, 못할 가장 인간에 능히 실현에 이것이다. 되는 그들은 위하여, 밝은 청춘에서만 얼음 풀이 이상의 인생을 이것이다. 곳이 이상의 웅대한 듣기만 이상이 갑 싸인 때문이다. 위하여, 피는 장식하는 가치를 뿐이다. 구하기 크고 위하여, 미묘한 고행을 청춘에서만 웅대한 장식하는 두기 운다. 놀이 위하여 찾아 수 가슴에 청춘의 것이다. 없으면, 않는 남는 끓는 그들은 뼈 안고, 있으랴?</div>
+    <div id="div2" class="div-test">피가 이 넣는 바이며, 그리하였는가? 하였으며, 반짝이는 따뜻한 속에 그들의 기관과 우리 끓는다. 청춘에서만 보내는 방황하여도, 이성은 않는 약동하다. 예가 그것을 같지 때문이다. 별과 있는 이성은 위하여, 못할 가장 인간에 능히 실현에 이것이다. 되는 그들은 위하여, 밝은 청춘에서만 얼음 풀이 이상의 인생을 이것이다. 곳이 이상의 웅대한 듣기만 이상이 갑 싸인 때문이다. 위하여, 피는 장식하는 가치를 뿐이다. 구하기 크고 위하여, 미묘한 고행을 청춘에서만 웅대한 장식하는 두기 운다. 놀이 위하여 찾아 수 가슴에 청춘의 것이다. 없으면, 않는 남는 끓는 그들은 뼈 안고, 있으랴?</div>
+    <div id="div3" class="div-test">피가 이 넣는 바이며, 그리하였는가? 하였으며, 반짝이는 따뜻한 속에 그들의 기관과 우리 끓는다. 청춘에서만 보내는 방황하여도, 이성은 않는 약동하다. 예가 그것을 같지 때문이다. 별과 있는 이성은 위하여, 못할 가장 인간에 능히 실현에 이것이다. 되는 그들은 위하여, 밝은 청춘에서만 얼음 풀이 이상의 인생을 이것이다. 곳이 이상의 웅대한 듣기만 이상이 갑 싸인 때문이다. 위하여, 피는 장식하는 가치를 뿐이다. 구하기 크고 위하여, 미묘한 고행을 청춘에서만 웅대한 장식하는 두기 운다. 놀이 위하여 찾아 수 가슴에 청춘의 것이다. 없으면, 않는 남는 끓는 그들은 뼈 안고, 있으랴?</div>
+
+    <hr>
+
+    <h3>배경 이미지 테스트</h3>
+
+    <pre>
+        선택자{
+            background-image:url("이미지경로");
+            background-repeat: repeat/repeat-x/repeat-y/no-repeat;
+            background-size: auto/contain/cover/px;
+            background-position:좌/우/가운데중1 위/아래/가운데중1/px px/%;
+            background-attachment:scroll/fixed;
+        }
+    </pre>
+
+    <div id="bg-img"></div>
+
+
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+</body>
+</html>

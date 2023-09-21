@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>글꼴관련스타일</title>
+    <style>
+        #ff1{
+            font-family: 궁서체;
+        }
+        #ff2{
+            font-family : 고딕체;
+        }
+        #ff3{
+            font-family : 경민2체 , 궁서체, 고딕체;
+            /* 앞의 글꼴이 없다면 뒤의 대체 글꼴 반영 */
+        }
+        #web-font{
+            font-size : 30px;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        #fs1{
+            font-size:30px;
+        }
+
+        #fs2{
+            font-size:2em;
+        }
+        #fs3{
+            font-size:200%;
+        }
+
+        #fw1{
+            font-weight: normal;
+        }
+
+        #fw2{
+            font-weight: bold;
+        }
+        #fw3{
+            font-weight: 900; /* bolder */
+        }
+        #fw4{
+            font-weight: lighter;
+        }
+
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <h1>글꼴 관련 스타일 속성(font~~)</h1>
+    
+    <h3>font-family : 글꼴을 지정할 때 사용</h3>
+    <pre>
+        선택자 {
+            font-family : 글꼴명; 글꼴명;
+        }
+    </pre>
+
+    <p id="ff1">글꼴 테스트</p>
+    <p id="ff2">글꼴 테스트</p>
+    <p id="ff3">글꼴 테스트</p>
+
+    <h3>* 외부 웹 폰트 사용하는 방법</h3>
+    <p>
+        웹 폰트 제공 사이트 : 
+        <a href="http://fonts.google.com" target="_blank">구글 웹폰트 사이트</a>
+    </p>
+
+    <p id="web-font">font style test 글꼴 테스트 1</p>
+
+    <hr>
+
+    <h3>font-size : 글꼴의 크기를 변경할 때 사용</h3>
+    <pre>
+        선택자 {
+            font-size : 크기(px/em/%);
+        }
+    </pre>
+    <!-- px : 픽셀 , em : 배수, % : 비율-->
+
+    <ul>
+        <li id="fs1">고정크기 px 테스트</li>
+        <li id="fs2">가변크기 em 테스트</li>
+        <li id="fs3">가변크기 %  테스트</li>
+    </ul>
+
+    <hr>
+
+    <h3>font-weight : 글꼴의 굵기를 표현할 때 사용</h3>
+    <pre>
+        선택자 {
+            font-weight:normal/bold/bolder/lighter/100/400/900;
+        }
+    </pre>
+
+    <ul>
+        <li id="fw1">원래굵기</li>
+        <li id="fw2">굵은 글꼴로 변경</li>
+        <li id="fw3">원래 굵기보다 더 굵게</li>
+        <li id="fw4">월래 굵기보다 더 가늘게</li>
+    </ul>
+    
+    <hr>
+
+    <h3>font-variant : 텍스트 문구를 작은 대문자로 변경할 때 사용</h3>
+    <pre>
+        선택자 {font-variant:small-caps;}
+    </pre>
+
+    <p>I LOVE YOU</p>
+    <p style="font-variant: small-caps;">i love you</p>
+
+    <hr>
+
+    <hr>
+
+    <h3>font-style : 텍스트문구를 기울이고자 할 때 사용</h3>
+    <pre>
+        선택자 {font-style:normal/italic/oblique;}
+    </pre>
+
+    <ul>
+        <li style="font-style:italic">italic : 기울임 글꼴</li>
+        <li style="font-style:oblique">oblique : 글자자체를 기울임</li>
+    </ul>
+
+
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+</body>
+</html>

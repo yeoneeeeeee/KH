@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        if(window.localStorage != undefined){
+            // 웹스토리지를 사용할수 있는 경우
+            console.log("당신의 브라우저는 Web Storage를 사용하실수 있습니다.");
+        }else{
+            // 웹스토리지를 사용할수 없는 경우
+            alert("당신의 브라우저는 Web Storage를 사용할수 없습니다. 최신브라우저로 업데이트해주세요.");
+        }
+    </script>
+
+    <style>
+        #tbl-entry{
+            border : 1px solid black;
+            border-collapse : collapse;
+            margin : 10px 0;
+        }
+
+        #tbl-entry th, #tbl-entry td {
+            border : 1px solid black;
+            padding : 5px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Web-Stroage</h1>
+
+    <!--
+        client(browser)에 사용자 데이터를 저장하는 html5 표준 api
+        1. sessionStorage : 서버에 접속하는 동안만 기록이 되고, 세션이 종료(브라우저가 종료되면)되면 데이터 삭제
+        2. localStorage   : 만료기간이 없이 삭제전까지 데이터가 기록되는 저장공간
+                            -> 실제 클라이언트의 디스크내부에 데이터가 저장됨
+    -->
+
+    <h2>CRUD</h2>
+    <fieldset>
+        <legend>아이템 저장/수정하기</legend>
+        <input type="text" id="key1" placeholder="key">
+        <input type="text" id="value1" placeholder="value">
+        <input type="button" value="저장"  onclick="test1()">
+    </fieldset>
+    
+    <script>
+        function test1(){
+            /*
+                key , value 한쌍으로 localStorage에 저장
+                1. setItem 함수 이용
+                2. obj.key = value ==> obj[key] = value ★
+            */
+            const key = document.getElementById("key1");
+            const value = document.getElementById("value1");
+
+            //방법1
+            //localStorage.setItem( key.value  ,  value.value );
+            //방법2
+            localStorage[key.value] = value.value;
+
+            key.value = "";
+            value.value = "";
+        }
+    </script>
+
+    <fieldset>
+        <legend>아이템 가져오기</legend>
+        <input type="search" id="key2" placeholder="검색하고자하는 키값을 입력하세요">
+        <input type="button" value="검색" onclick="test2();">
+    </fieldset>
+
+    <script>
+        function test2(){
+            /* 
+                localStorage에서 key값으로 아이템 조회하기
+                1. getItem(key)
+                2. localStorage[key]
+            */
+           const key = document.getElementById("key2");
+           const value = localStorage.getItem(key.value);
+
+           if(value != null){
+               //조회결과가 있을때
+               alert(key.value +" : "+value);
+           }else{
+               alert("조회한 데이터가 없습니다.");
+           }
+
+           key.value = "";
+           console.log(value);// 꺼내온 데이터는 "무조건" string
+        }
+    </script>
+
+    <fieldset>
+        <legend>아이템 삭제하기</legend>
+        <input type="search" id="key3" placeholder="key">
+        <input type="button" value="삭제" onclick="test3();">
+    </fieldset>
+
+    <script>
+
+        function test3(){
+            // removeItem(key) 
+            const key = document.getElementById("key3");
+            localStorage.removeItem(key.value);
+            key.value="";
+        }
+    </script>
+
+    <h2>객체 저장</h2>
+    <input type="button" value="객체저장" onclick="test4()">
+    <script>
+        /*
+            localStorage의 value은 모두 string으로 처리되므로, 
+            객체저장시 toString() 호출결과를 저장한다.
+        */
+        function test4(){
+
+            const user = {
+                id : 'mkm',
+                phone : '01041213393',
+                age  : 36,
+                name : '민경민',
+                toString : function(){
+                    return this.id +","+this.phone+","+this.age+","+this.name;
+                }
+            };
+            // 해결방법. 데이터를 저장시 javascript 객체를 JSON형식으로 저장.
+            /* 
+                JSON(JavaScript Object Notaion) : 값이나 객체를 다룰때 범용적으로 많이 사용되는 형식
+                JSON은 단순 문자열로만 이루어져있기 때문에 가볍고, 읽기 편하다.
+                JSON은 본래 자바스크립트에서 사용할 목적으로 만들어진 형식(포맷)이나, 자바스크트립트가
+                아닌 다른 언어에서도 라이브러리를 활용하여 JSON을 다룰수가 있기 때문에 자바스크립트에서
+                다른언어간의 데이터 교환을 목적으로 사용하는 경우가 굉장히 많다(매우 많다)
+            */
+            // JSON.stringify => 자바스크립트 객체를 JSON포맷으로 바꿔줌
+            const jsonStr = JSON.stringify(user);
+            console.log(jsonStr);
+
+            localStorage.setItem("user" , jsonStr);
+
+            const value = localStorage.getItem("user");
+            console.log(value.id);
+
+            // JSON.parse(JSON형태의객체) => JSON객체를 javascript객체로 변환 
+            const parsedUser = JSON.parse(value);
+            console.log(parsedUser);
+            console.log(typeof parsedUser);
+        }
+    </script>
+
+    <h2>방명록</h2>
+
+    <form action="javascript:saveEntry();" name="entryFrm">
+        <fieldset>
+            <legend>작성</legend>
+            <table>
+                <tr>
+                    <th>이름</th>
+                    <td><input type="text" name="name"></td>
+                </tr>
+                <tr>
+                    <th>내용</th>
+                    <td><input type="text" name="content"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align:center;">
+                        <input type="submit" value="저장">
+                    </td>
+                </tr>
+            </table>
+
+        </fieldset>
+    </form>
+
+    <table id="tbl-entry"></table>
+
+    <script>
+        /* 
+            entries배열 만든후, 사용자 방명록을 관리
+        */
+        function saveEntry(){
+            //alert("saveEntry호출");
+            const frm = document.entryFrm; // name속성값으로 form요소 가져오기
+            const entry = {
+                name : document.entryFrm.querySelector("[name=name]").value,
+                content : frm.querySelector("[name=content]").value
+            };
+            
+            //entries배열
+            const entries =  JSON.parse(sessionStorage.getItem("entries")) || [];
+            entries.push(entry);
+
+            // 자바스크립트 객체를 json문자열로 변환
+            const jsonEntries = JSON.stringify(entries);
+
+            sessionStorage.setItem("entries" , jsonEntries);
+
+            // 폼 전체 초기화
+            frm.reset();
+
+            //방명록 최신화
+            showEntries();
+        }
+
+        function showEntries(){
+
+            const entries = JSON.parse(sessionStorage.getItem("entries")) || [];
+
+            console.log(entries);
+
+            const table = document.getElementById("tbl-entry");
+
+            // header추가
+            table.innerHTML = "<tr><th>No</th><th>이름</th><th>내용</th></tr>";
+
+            if(entries.length > 0){
+                //저장된 entry가 있다면
+                entries.forEach(function(item, index){
+                    table.innerHTML += `<tr><td>${index+1}</td><td>${item.name}</td><td>${item.content}</td></tr>`;
+                });
+            }else{
+                //저장된 entry요소가 없다면
+                table.innerHTML += "<tr><td colspan='3'>조회된 방명록이 없습니다</td></tr>";
+            }
+        }
+        window.onload = function(){
+            showEntries();
+        }
+    </script>
+
+    <h2>번외 - 논리형으로의 형변환</h2>
+    <input type="button" value="실행" onclick="test5();">
+
+    <script>
+        /* 
+            변수 , 리터럴(값)이 boolean형으로 형변환 가능
+
+            값이 존재한다? ture로 치환       -> 123, -100, 3.14 , "안녕", new Date()
+            값이 존재하지않는다? false로 치환 ->  0 , 0.0 , "" , undefiend , null , NaN
+        */
+        const test5 = function bar(){
+            // true
+            console.log(Boolean(123));
+            console.log(Boolean(-100));
+            console.log(Boolean(3.14));
+            console.log(Boolean("abc"));
+            console.log(Boolean(new Date()));
+            console.log(Boolean(document.getElementById("key1")))
+
+            if(document.getElementById("key1") && document.getElementById("key1").value){
+
+            }
+            document.getElementById("key1")?.value
+            
+
+            console.log("===================================================")
+            //false
+            console.log(Boolean(0));
+            console.log(Boolean(0.0));
+            console.log(Boolean(""));
+            console.log(Boolean(undefined));
+            console.log(Boolean(null));
+            console.log(Boolean(NaN));       
+            
+            const name = prompt("이름을 입력하세요");
+
+            //1. "민경민" 확인 -> "민경민" -> true
+            //2. "" 확인      -> "" -> false
+            //3. 취소         -> null -> false
+            if(name){
+                //alert(name+"님 환영합니다");
+                const result = document.querySelector("#result");
+                
+                if(result){
+                    // result값이 존재한다면 실행할코드
+                    result.innerHTML = "반갑습니다"+name+"님!";
+                }else{
+                    // result값이 존재하지 않는다면 실행할 코드
+                    console.log("result가 존재하지 않습니다.");
+                }
+
+            }else{
+                alert("올바름이름을 입력하세요");
+            }
+        }
+        //test5();
+
+        //bar(); // 에러발생
+    </script>
+    <div id="result2"></div>
+
+    <br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br>
+
+    
+
+
+
+    
+</body>
+</html>

@@ -1,0 +1,35 @@
+package com.kh.opendata.model.vo;
+
+public class AirVo {
+	
+	private String stationName;//측정소명
+	private String dataTime; // 측정일시
+	private String khaiValue; // 통합대기환경수치
+	
+	private String pm10Value;// 미세먼지농도
+	private String so2Value; //아황상가스농도
+	private String coValue; //일산화탄소
+	private String no2Value; // 이산화질소 농도
+	private String o3Value; // 오존농도
+	
+	public AirVo() {
+		
+	}
+	
+	public AirVo(String stationName, String dataTime, String khaiValue, String pm10Value, String so2Value,
+			String coValue, String no2Value, String o3Value) {
+		super();
+		this.stationName = stationName;
+		this.dataTime = dataTime;
+		this.khaiValue = khaiValue;
+		this.pm10Value = pm10Value;
+		this.so2Value = so2Value;
+		this.coValue = coValue;
+		this.no2Value = no2Value;
+		this.o3Value = o3Value;
+	}
+	
+	
+	
+	
+}

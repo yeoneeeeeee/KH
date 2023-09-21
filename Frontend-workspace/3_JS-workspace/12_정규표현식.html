@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>정규식</title>
+    <link href="resources/css/common.css" rel="stylesheet">
+</head>
+<body>
+
+    <h1>정규표현식 => 정규식 => 규식이형</h1>
+    <p>
+        정규표현식(REGEX / REGEXP : Regular Expression) 이란, <br>
+        특정 패턴을 가진 문자열을 찾거나 또는 찾아서 치환할대 사용하는 형식의 언어 <br>
+        정규표현식을 이용하면 문자열에 대해 특정 패턴 조건검사시 또는 치환시<br>
+        복잡한 조건을 제시할 필요 없이 간단하게 처리 가능함<br>
+        자바스크립트 뿐만 아니라 자바나 오라클등 다른 언어에서도 사용 가능
+    </p>
+
+    <h3>* 정규표현식 객체 생성 및 정규표현식과 관련된 메소드</h3>
+    <button onclick="test1();">실행확인</button>
+    <div id="area1" class="area"></div>
+
+    <script>
+        function test1(){
+
+            // 정규표현식 객체 생성 == 정규식 변수를 선언
+            // == 검색 조건으로 삼고자하는 문자열이나 혹은 특정 패턴 제시
+            const regExp = new RegExp("script"); // 방법1
+            const regExp2 = /script/; // 방법2
+
+            console.log(regExp, regExp2);
+
+            // 비교할 문자열
+            const str1 = "javascript jquery ajax";
+            const str2 = "java oracle html css react";
+            /* 
+                * RegExp객체에서 제공하는 메소드 (정규식.xxx(문자열))
+                - 정규식.test(문자열) : 문자열에서 정규식값과 일치하는 값이 있으면 true/ 없으면 false
+                - 정규식.exec(문자열) : 문자열에서 정규식값과 일치하는 값이 있으면 처음 매칭된 문자열
+                반환 / 없으면 null 반환
+
+                - String 객체에서 제공하는 메소드(문자열.함수명(정규식))
+                - 문자열.match(정규식) : 문자열에서 정규식값과 일치하는 값을 찾아서 반환
+                - 문자열.search(정규식) : 문자열에서 정규식 값과 일치하는 값의 시작인덱스 값을 반환.
+                                         일치하는 값이 없다면 -1 반환
+                - 문자열.replace(정규식 , 바꿀값) : 문자열에서 정규식 값과 일치하는 첫번째 부분을
+                바꿀값으로 변경해서 반환
+                - 문자열.split(정규식) : 정규식에 지정된 값을 구분자로해서 쪼개진 값들이 담겨있는 배열
+                반환
+
+            */
+
+            const area1 = document.getElementById("area1");
+            // 정규식 관련메소드
+            area1.innerHTML += "regExp.test(str1) : " + regExp.test(str1)+"<br>";
+            area1.innerHTML += "regExp.test(str2) : " + regExp.test(str2)+"<br>";
+            area1.innerHTML += "regExp.exec(str1) : " + regExp.exec(str1)+"<br>";
+            area1.innerHTML += "regExp.exec(str2) : " + regExp.exec(str2)+"<br>";
+
+            // 문자열 메서드
+            area1.innerHTML += "str1.match(regExp) : "+str1.match(regExp)+"<br>";
+            area1.innerHTML += "str1.search(regExp) : "+str1.search(regExp)+"<br>";            
+            area1.innerHTML += "str1.replace(regExp , '스크립트') : "+str1.replace(regExp ,'스크립트')+"<br>";
+            area1.innerHTML += "str1.split(regExp) : "+str1.split(regExp)+"<br>";
+        }
+    </script>
+
+    <h3>* 메타문자</h3>
+    <p>
+        메타문자를 이용해서 정규식으로 검색조건으로 삼을 특정 패턴을 제시 가능<br>
+        문자열이 해당 정규식으로 제시한 특정패턴에 만족하는지<br>
+        test()를 통해 검사하거나, replace()를 이용해서 치환할수 있다.
+    </p>
+
+    <button onclick="test2()">실행확인</button>
+    <div id="area2" class="area"></div>
+
+    <script>
+        function test2(){
+            const area2 = document.getElementById("area2");
+
+            const str = "javascript jquery ajax"; // 비교할 문자열
+
+            let regExp = /a/; // 정규식(메타문자 X)
+
+            area2.innerHTML += "/a/ : " +regExp.test(str)+"<br>";
+            area2.innerHTML += "/a/ : " +str.replace(regExp , "(**)")+"<br>";
+            // 기본적으로 repalce는 치환시 일치하는 값들중 첫번째 값만 바꿔준다.
+
+            // 1. ^ : 시작을 의미 => css속성선택자 중 ^= : 해당값으로 "시작"하는 경우
+            regExp = /^j/; // 메타문자가 있는경우
+            // 문자열이 소문자 j로 시작하는 경우에만 true -> jxxxx 
+            area2.innerHTML += "/^j/ : " +regExp.test(str)+"<br>";
+            area2.innerHTML += "/^j/ : " +str.replace(regExp , "(**)")+"<br>";
+
+            // 2. [] : []내의 문자 중 하나라도 존재할 경우를 의미
+            regExp = /[abc]/; // 제시한 문자열중 a or b or c가 하나라도 존재할 경우
+            area2.innerHTML += "/[abc]/ : " +regExp.test(str)+"<br>";
+            area2.innerHTML += "/[abc]/ : " +str.replace(regExp , "(**)")+"<br>";
+
+            // 1,2 한세트로 묶어주기
+            regExp = /^[jsa]/; // 시작값이 j거나 s거나 a인지 비교할 목적의 패턴
+            area2.innerHTML += "/^[jsa]/ : " +regExp.test(str)+"<br>";
+            area2.innerHTML += "/^[jsa]/ : " +str.replace(regExp , "(**)")+"<br>";
+
+            // 3. $ : 끝을 의미($= 내가제시한 값으로 끝나는 경우)
+            regExp = /x$/;
+            area2.innerHTML += "/x$/ : " +regExp.test(str)+"<br>";
+            area2.innerHTML += "/x$/ : " +str.replace(regExp , "(**)")+"<br>";
+
+            // 1,2,3번을 묶어서
+            // 시작값은 j이고 끝값은 x인지 확인
+            regExp = /^jx$/;
+            area2.innerHTML += "/^jx$/ : " +regExp.test(str)+"<br>";
+            //현재 위의 패턴에 만족하는 문자열은 오직 'jx'하나
+
+            // 4. . : 개행문자(\n, \r)를 제외한 모든 문자(영문자, 숫자, 한글, 특수문자)
+            // 5. + : 한글자 이상(0글자 x)
+            //   .+ : 어떤글자가 됐든 한글자이 이상인경우
+
+            regExp = /^j.+x$/; //j1x , j2x, j11x, j22, j111x, j222x
+            area2.innerHTML += "/^j.+x$/: " +regExp.test(str)+"<br>";
+            area2.innerHTML += "/^j.+x$/: " +str.replace(regExp , "(**)")+"<br>";
+
+
+            // 시작부터 끝까지 오로지 숫자값으로만 이루어진 경우
+            // (숫자의 갯수는 상관없음. 단, 적어도 한글자는 무조건 있어야함)
+            regExp = /^[0123456789]+$/; // 해당목록에 있는 문자열중 정규표현식과 일치하는 것이하는 경우
+            //0123456789는 0-9로 줄여서 표현가능
+            regExp = /^[0-9]+$/
+            area2.innerHTML += `/^[1234567890]+$/ : ${regExp.test("567890")}<br>`;
+            area2.innerHTML += `/^[1234567890]+$/ : ${regExp.test("567%890")}<br>`;
+
+            // 시작부터 끝가지 오로지 영문자로만 이루어진 경우
+            // (갯수는 상관없음. 단 적어도 한글자는 무조건 있어야한다.)
+            regExp = /^[a-zA-Z]+$/;
+            area2.innerHTML += `/^[a-zA-Z]+$/ : ${regExp.test("Javascript")}`;// true
+            area2.innerHTML += `/^[a-zA-Z]+$/ : ${regExp.test("Javascript123!!")}`; // false
+
+            // 시작부터끝까지 오로지 영문자, 숫자로만 이루어진경우
+            regExp = /^[a-zA-Z0-9]+$/;
+
+            // 시작부터 끝가지오로지 한글(자음, 모음, 결합)로만이루어진 경우
+            regExp = /^[ㄱ-ㅎㅏ-ㅡ가-힣]+$/; // ㄱㅇㅇ ㅏㅏㅏ 민경민
+
+            area2.innerHTML += "/^[ㄱ-ㅎㅏ-ㅡ가-힣]+$/ : "+regExp.test("자바스크립트")+"<br>";
+        }
+    </script>
+
+    <hr>
+
+    <h3>* 플래그 문자 </h3>
+    <p>
+        i : 대소문자를 가리지 않고 비교를 수행하겠다 <br>
+        g : 문자열 내의 모든 패턴을 찾는다 (전역으로 비교를 수행하겠다.)
+        m : 여러줄 비교를 수행하겠다.
+    </p>
+
+    <button onclick="test3();">실행</button>
+
+    <script>
+        function test3(){
+            let str = "JavaScript JQuery AJax";
+
+            let regExp = /a/;
+            console.log("/a/ : "+str.replace(regExp , '(**)'));
+            // J(**)vaScript JQuery AJax
+
+            regExp = /a/g;
+            console.log("/a/g : "+str.replace(regExp , '(**)'));
+
+            regExp = /a/gi;
+            console.log("/a/gi : "+str.replace(regExp , '(**)'));
+
+            str = "JavaScript\nJQuery\nAjax";
+
+            regExp = /^J/;
+            console.log("/^J/ : "+ str.replace(regExp , "(*)"));
+
+            regExp = /^J/gm;
+            console.log("/^J/gm : "+ str.replace(regExp , "(*)"));
+        }
+    </script>
+
+    <hr>
+
+    <h3>* 정규표현식을 가지고 주민번호 확인</h3>
+
+    주민번호 : <input type="text" placeholder="-를 포함해서 입력하세요" id="pno">
+    <button onclick="test4()">확인</button>
+
+    <script>
+        function test4(){
+            const value = document.getElementById("pno").value;// 사용자강비력한 주민번호값
+
+            // 1단계 : 6글자 - 7글자
+            let regExp = /^......-.......$/;// 숫자 외에도한글, 영문, 특수문자 다들어갈수있따(개행문자제외)
+
+            // 숫자 외에도 다른 숫자가와도 정상적인 입력이라고 간주하는 정규표현식이기때문에 숫자만 오도록
+            // 강제하기
+            // 2단계 : [0-9]
+            regExp = /^[0-9]{6}-[0-9]{7}$/;
+
+            /* 
+                * 추가적인 메타문자
+                \d : 숫자 ( [0-9]와 동일)
+                \D : 숫자를 뺀 모든문자
+                \w : 영문자 , 숫자, _ 
+                \W : 영문자 , 숫자, _를 제외한 모든 문자
+                \s : 공백문자(띄워쓰기 , 탭, 줄바꿈)
+                \S : 공백문자를 제외한 모든 문자
+
+                * 수량문자
+                + : 1글자 이상(최소 1글자는 반드시 있어야함)
+                * : 0글자 이상(0글자도 가능하다는뜻)
+                ? : 0글자 혹은 1글자 (2글자이상은 불가능)
+
+                {n} : n글자
+                {n,m} : n글자 이상 m글자 이하
+                {n,} : n글자 이상
+                {,n} : n글자 이하
+            */
+
+            // 3단계 : 성별자리에 해당하는 부분에 1, 2 ,3, 4만 들어가도록 변경
+            regExp = /^\d{6}-[1-4]\d{6}$/;
+
+            // 4단계 : 생년월일 중 월(1~12)을 체크
+            /* 
+                - 생년(두자리) : \d{2}
+                  아무숫자로 두자리만 채우면 끝
+               
+                - 월(두자리) : (0[1-9]|1[0-2]) => (경우1|경우2)
+                01 02 03 04 05 06 .. 12
+                01 02 03 04 ... 10 11 12
+                앞자리에 0이 오는 경우 뒷자리는 1~9까지 가능 -> 0[1-9]
+                앞자리에 1이 오는 경우 뒷자리는 0~2까지 가능 -> 1[0-2]
+
+                - 일(두자리) : (0[1-9]|[1-2][0-9]|3[0-1])
+                01 02 03 ... 09
+                앞자리가 0일경우 뒷자리는 1~9 가능 : 0[1-9]
+                앞자리가 1일경우 뒷자리는 0~9 가능 : 1[0-9]
+                앞자리가 2일경우 뒷자리는 0-9 가능 : 2[0-9] => [1-2][0-9]
+                앞자리가 3일경우 뒷자리는 0-1 가능 : 3[0-1]
+                1 ~ 31                
+            */
+            regExp = /^\d{2}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])-[1-4]\d{6}$/;
+
+            if(regExp.test(value)){
+                alert("정상입력함");
+            }else{
+                alert("잘못입력함");
+            }
+        }
+
+    </script>
+    
+</body>
+</html>

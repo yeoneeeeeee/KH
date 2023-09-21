@@ -1,0 +1,12 @@
+package com.kh.model.vo;
+
+/* 
+ * 
+ * VO(Value Object)
+ * DB 테이블의 한 행에 대한 데이터를 기록할수 있는 저장용 객체.
+ * 
+ * */
+
+public class Member {
+
+}

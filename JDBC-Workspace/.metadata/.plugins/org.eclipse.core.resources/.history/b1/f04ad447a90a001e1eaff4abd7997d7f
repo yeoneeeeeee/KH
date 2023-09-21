@@ -1,0 +1,26 @@
+package com.kh.model.vo;
+
+import java.sql.Date;
+
+/* 
+ * 
+ * VO(Value Object)
+ * DB 테이블의 한 행에 대한 데이터를 기록할수 있는 저장용 객체.
+ * 
+ * */
+
+public class Member {
+	private int userNo;	//	USERNO	NUMBER
+	private String userId;//	USERID	VARCHAR2(15 BYTE)
+	private String userPwd;//USERPWD	VARCHAR2(20 BYTE)
+	private String userName;//	USERNAME	VARCHAR2(20 BYTE)
+	private String gender; //	GENDER	CHAR(1 BYTE)
+	private int age;				//	AGE	NUMBER
+	private String email;	//	EMAIL	VARCHAR2(30 BYTE)
+	private String phone;	//	PHONE	CHAR(11 BYTE)
+	private String address; //	ADDRESS	VARCHAR2(100 BYTE)
+	private String hobby;	//	HOBBY	VARCHAR2(50 BYTE)
+	private Date enrollDate;//	ENROLLDATE	DATE
+}
+
+

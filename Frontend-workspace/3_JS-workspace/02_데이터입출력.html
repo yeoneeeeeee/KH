@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>데이터입출력</title>
+    <link rel="stylesheet" href="resources/css/common.css">
+</head>
+<body>
+    <h1>자바스크립트에서의 데이터 입/출력</h1>
+
+    <!--
+        window : 자바스크립트 "내장"객체로 브라우저 창이 열릴때마다 하나씩 만들어지는 객체,
+                 브라우저 창안에 존재하는 모든 요소들의 최상위 객체
+                 (모든곳에 적용되기 때문에 생략 가능하다 window.alert => alert / console.log => window.console.log )
+        document : 웹 문서마다 하나씩 만들어지는 객체 (HTML 문서에대한 정보들을 가지고 있음)
+    --> 
+
+    <h2>1. 데이터를 출력하는 기본 구문</h2>
+    <p>
+        1) window.alert("알림창에 출력할 문구");<br>
+        2) window.console.log("콘솔창에 출력할 문구");<br>
+        3) document.write("화면에 출력할 문구");<br>
+        4) 선택한요소.innerHTML/innerText = "해당 요소에 출력할 문구";
+    </p>
+
+    <h3>3) document.write("화면에 출력할 문구");</h3>
+    
+    <button onclick="documentWrite();">화면에 출력</button>
+    <script>
+        function documentWrite(){
+            //document.write("출력 잘 되고 있 습니까?");
+            //document.write("<b>흠... 잘출력되나??</b><br><h2>귀여워</h2>");
+            // 화면에 출력할 문자열에 html태그가 있을경우 진짜 html태그로 해석되서 보여짐
+            let table = "<table border='1'>";
+                table += "<tr>";
+                table += "<td>1</td>";
+                table += "<td>2</td>";
+                table += "</tr>";
+                table += "</table>";
+                    
+            document.write(table);
+        }
+    </script>
+
+    <br>
+
+    <h3>4) 선택한 요소.innerHTML/innerText = "해당 요소에 출력할 문구";</h3>
+    <div class="area" id="area1">
+        자바스크립트에서 어떤 요소(HTML element)안의 값(content값)을 가지고 온다거나<br>
+        변경하고자 할때 <b>innerHTML, innerText</b>라는 속성에 접근하면 된다
+    </div>
+
+    <button onclick="tagValue()">확인</button>
+
+    <script>
+        function tagValue(){
+
+            // 특정 요소의 값을 가지고 온다거나 변경하고자 할떄는 먼저 해당 요소객체를 가지고와서,
+            // 변수에 저장하는 과정이 필요하다
+
+            const divEl = document.getElementById("area1"); // div 요소객체를 변수에 담음
+            console.log(divEl);
+            console.dir(divEl);// console.dir : 해당 값의 디렉토리 구조를 보고자 할때(속성(property)들에대한 정보)
+
+            // 선택된 요소내에 정보들을 알아내고자 한다면 속성들에 직접 접근하여 확인(.을 통해서 접근)
+            console.log(divEl.id); // id은 해당 요소의 id값
+            console.log(divEl.className); // className : 해당 요소의 클래스값
+
+            // 선택된 요소의 content영역 안의 값에 접근하고자 한다면
+            console.log(divEl.innerHTML);// innerHTML : 요소의 CONTENT영역안의 HTML태그까지 다 포함해서 가져옴
+            console.log(divEl.innerText);// innerText : content값 내의 텍스트만 포함, html태그는 가져오지 않는다.
+
+            // 위와 같이 속성에 직접 접근해서 값을 가지고 오는것도(getter) 가능하지만 , 값을 변경(setter)하는것도 가능하다.
+
+            divEl.innerHTML = "<b>innerHTML로 속성값을 변경해버림</b>";
+            // innerHTML로 변경하면 출력할 문구에 HTML태그가 있을경우에 태그로 인식
+
+            divEl.innerText = "<b>innerText로 속성값을 변경해버림</b>";
+            // innerText로 변경하면 출력할 문구에 HTML태그가 있어도 문자열로 인식
+        }
+    </script>
+
+    <hr>
+
+    <h2>2. 데이터를 입력받는 기본 구문(변수에 기록 가능)</h2>
+    <p>
+        1) 변수 = window.confirm("질문내용"); <br>
+        2) 변수 = window.prompt("질문내용"); <br>
+        3) 변수 = 내가선택한요소.속성(id/className/innerHTML/.....); <br>
+        4) 변수 = 선택한input요소.value
+    </p>
+
+    <h3>1) window.confirm("질문내용");</h3>
+    <p>
+        confirm호출 시 "질문 내용"과 "확인/취소"버튼이 존재하는 알림창 발생<br>
+        확인 버튼 클릭 시 true / 취소버튼 클릭시 false 값을 반환한다
+    </p>
+
+    <button onclick="testConfirm();">클릭</button>
+    <div class="area" id="area2"></div>
+
+    <script>
+        function testConfirm(){
+            const result = window.confirm("졸리면 확인, 안졸리면 취소를 취소를 누르세요");
+
+            const divEl = document.getElementById("area2");
+
+            if(result){
+                divEl.innerHTML = "<h2>졸려요..</h2>";
+            }else{
+                divEl.innerHTML = "<h2>하나도 안졸립니다 ^^</h2>"
+            }
+        }
+    </script>
+
+    <br>
+
+    <h3>2) window.prompt("질문내용");</h3>
+    <p>
+        prompt 호출 시 "질문내용"과 입력할 수 있는 "텍스트상자"와 "확인/취소" 버튼이 보여지는 알림창 발생<br>
+        - 확인버튼 클릭 시 텍스트상자에 입력되어있는 값이 반환<br>
+        - 취소버튼 클릭 시 null을 반환
+    </p>
+
+    <button onclick="testPrompt();">클릭</button>
+    <div class="area" id="area3"></div>
+
+    <script>
+        function testPrompt(){
+            const name = window.prompt("당신의 이름은 무엇입니까?");
+            const age  = window.prompt("당신의 나이는 몇살입니까?");
+
+            const divEl = document.getElementById("area3");
+            divEl.innerHTML = `<b>당신은 바로 ${age}살인  ${name}님이군요..!</b>`;
+        }
+    </script>
+
+    <br>
+
+    <h3>4) 선택한 input요소.value;</h3>
+    아이디 : <input type="text" id="userId"> <br>
+    비밀번호: <input type="password" id="userPwd"> <br>
+
+    <button onclick="testInput()" id="test-btn" data-mkm="alsrudals" data-name="hey">클릭해</button>
+
+    <script>        
+        function testInput(){
+            const input1 = document.getElementById("userId"); // input요소
+            const input2 = document.getElementById("userPwd");
+            
+            const btn = document.getElementById("test-btn");
+
+            console.log(input1.value);
+            console.log(input2.value);
+
+            console.log(btn.dataset.mkm);
+
+            input1.value = "";
+        }
+    </script>
+
+
+
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+
+
+
+
+
+</body>
+</html>

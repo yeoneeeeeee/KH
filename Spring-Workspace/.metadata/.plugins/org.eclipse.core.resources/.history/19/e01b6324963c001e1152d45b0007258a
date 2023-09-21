@@ -1,0 +1,6 @@
+package com.kh.opendata;
+
+@Slf4j
+public class APIController {
+
+}

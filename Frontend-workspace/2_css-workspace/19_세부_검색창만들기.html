@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div, form{
+            
+            box-sizing: border-box;
+        }
+
+        /* 통합시 제거*/
+        #header_2{
+            width: 600px;
+            height: 150px;
+        }
+
+        #header_2{
+            position: relative; /* 검색창 가운데 정렬 시키기 1단계 */
+        }
+
+        #search_form{
+            width: 80%;
+            height: 20%;
+            margin: auto;/* 수평기준으로 가운데 정렬만 맞춰준다.*/
+            position: absolute;
+            /* 검색창 가운데 정렬시키기 2단계*/
+            right: 0;
+            left:0;
+            top:0;
+            bottom:0;
+        }
+
+        #search_form>div{
+            height: 100%;
+            float: left;
+        }
+
+        #search_text{
+            width: 80%;
+        }
+        #search_btn{
+            width: 20%;
+        }
+
+        #search_form input{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="header_2">
+        <form id="search_form">
+            <div id="search_text">
+                <input type="search" name="keyword">
+            </div>
+            <div id="search_btn">
+                <input type="submit" value="검색">
+            </div>
+        </form>
+    </div>
+    
+</body>
+</html>

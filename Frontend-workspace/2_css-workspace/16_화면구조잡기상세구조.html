@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            box-sizing: border-box; 
+            /* 
+                지금부터 지정하는 가로세로길이는 테두리까지 포함한 길이임을 의미
+            */
+            border: 1px solid red;
+        }
+
+        /* 전체를 감싸는 div wrap */
+        .wrap{
+            width:1000px;
+            height: 800px;
+            margin:auto;/* 좌우로 가운데로 자동정렬 시켜줌*/
+        }
+
+        /* 크게 3가지 영역에 스타일 부여*/
+        /* #header , #content , #footer*/
+        .wrap>div{ /* class 속성이 wrap이면서 자손태그중 div태그에만 스타일 부여하겠다 */
+            width: 100%;
+        }
+
+        #header, #footer{
+            height: 20%;
+        }
+
+        #header>div{
+            height: 100%;
+            float: left;
+        }
+
+        #header_1{
+            width: 20%;
+        }
+
+        #header_2{
+            width: 65%;
+        }
+
+        #header_3{
+            width: 15%;
+        }
+
+        #nav{
+            height: 5%;
+        }
+
+        #content{
+            height: 55%;
+        }
+
+        #content>div{
+            height: 100%;
+            float:left;
+            /* 블럭요소인 div들을 옆으로 배치되게끔 해줌 */
+        }
+        #content_1{
+            width: 15%;
+        }
+        #content_2{
+            width: 65%;
+        }
+        #content_3{
+            width: 20%;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div id="header">
+            <div id="header_1"></div>
+            <div id="header_2"></div>
+            <div id="header_3"></div>
+        </div>
+        <div id="nav"></div>
+        <div id="content">
+            <div id="content_1"></div>
+            <div id="content_2"></div>
+            <div id="content_3"></div>
+        </div>
+        <div id="footer"></div>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>애니메이션 관련 스타일</title>
+    <style>
+        .anitest1:checked+div{
+            width:200px;
+            animation-name:ani;
+            animation-duration:2s;
+            animation-direction:alternate;
+            animation-iteration-count: infinite;
+        }
+        .check-anitest2:checked+div{
+            animation : ani2 5s infinite alternate;
+        }
+
+        @keyframes ani{
+            from{
+                background-color: green;
+                border: 1px solid black;
+            }
+            to{
+                background-color: yellow;
+                border-radius: 50%;
+                transform: rotate(720deg);
+                border:3px solid red;
+            }
+        }
+        @keyframes ani2{
+            0%{
+                background-color:green;
+                border:3px solid black;
+            }
+            30%{
+                transform:translate(100px, 100px);
+            }
+            50%{
+                background-color: pink;
+                transform: scale(1.5);
+                border-color: yellow;
+            }
+            100%{
+                background-color: blue;
+                transform: rotate(360deg);
+                border-color: red;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>애니메이션 관련 스타일</h1>
+    <h2>애니메이션</h2>
+    <p>
+        속성을 점차적으로 변화시켜 움직이는 효과를 내는 기법
+        트랜지션과 비교했을 때 시작스타일과 종료스타일을 부드럽게 이어주는 기능을 하는것은 같다
+        단, 애니메이션은 중간에 원하는 위치에 @keyframes를 이용하여 중간스타일도 지정 가능
+    </p>
+
+    <br>
+    <br>
+    <hr>
+
+    <h3>keyframes</h3>
+    <p>
+        애니메이션 시작지점과 종료지점의 스타일을 정하고 keyframes의 이름을지정
+        시작지점과 종료지점 두개만 설정할경우 from to로 설정하면되고,
+        중간에 하고싶은 작업이 있다면 %로 구분하여 설정
+    </p>
+    <pre>
+        @keyframes 키프레임명{
+            선택자 {스타일;}
+        }
+    </pre>
+    <input type="checkbox" class="anitest1">
+    <div class="anitest">기본 애니메이션 적용</div>
+
+    <input type="checkbox" class="check-anitest2">
+    <div class="anitest2">추가 애니메이션 적용</div>
+
+</body>
+</html>

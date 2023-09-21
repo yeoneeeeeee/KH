@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Practice3</h1>
+    <form action="test">
+        <fieldset>
+            <legend>회원가입</legend>
+            아아디 : <input type="text" id="userId" data-warn="ID"> <label id="idLabel"></label>
+            <br><br>        
+            
+            비밀번호 : <input type="password" id="userPwd" data-warn="PWD"> <br><br>
+            비밀번호 확인 : <input type="password" id="checkPwd"> <label id="pwdLabel"></label>
+            <br><br>
+            이름 : <input type="text" id="userName" data-warn="이름"><br><br>
+            <input type="submit" value="회원가입" onclick="return validate();">
+        </fieldset>
+    </form>
+    <script>
+        const userId = document.getElementById("userId");
+        const idLabel = document.getElementById("idLabel");
+        const userPwd = document.getElementById("userPwd");
+        const checkPwd = document.getElementById("checkPwd");
+        const pwdLabel = document.getElementById("pwdLabel");
+        const userName = document.getElementById("userName");
+
+        userId.addEventListener("keyup", idCheck);
+
+        function idCheck(){
+            if(userId.value == 'user01'){
+                // 중복된상태
+                idLabel.innerHTML = "이미 존재하는 아이디입니다.";
+                idLabel.style.color = "red";
+                return false;
+            }else{ // 중복이 아닌상태
+                idLabel.innerHTML = "사용 가능한 아이디입니다.";
+                idLabel.style.color = "green";
+                return true;
+            }
+        }
+        checkPwd.addEventListener("blur" , function (){
+            if(userPwd.value == checkPwd.value){
+                pwdLabel.innerHTML = "비밀번호가 일치합니다.";
+                pwdLabel.style.color= "green";
+            }else{
+                pwdLabel.innerHTML = "비밀번호가 일치하지 않습니다.";
+                pwdLabel.style.color= "red";
+            }
+        });
+        
+        let validateObj = {
+            // checkedId : { key : userId , name : "ID"},
+            // checkedPwd : { key : userPwd , name : "PWD"},
+            // checkedName : { key : userName , name : "이름"},
+            // checkedId : userId,
+            // checkedPwd : userPwd,
+            // checkedName : userName
+            userId,
+            userPwd,
+            userName
+        }
+
+        function validate(){    
+
+            for( let key in validateObj){
+                if(validateObj[key].value.trim().length == 0){
+                    alert(validateObj[key].dataset.warn +"를 입력해주세요");
+                    validateObj[key].focus();
+                    return false;
+                }
+                // if(validateObj[key].key.value.trim().length == 0){
+                //     alert(validateObj[key]["name"]+"를 입력해주세요");
+                //     validateObj[key].key.focus();
+                //     return false;
+                // }
+            }
+            // if(userId.value.trim().length == 0){
+            //     alert("ID를 입력해주세요");
+            //     userId.focus();
+            //     return false;
+            // }
+            // if(userPwd.value.trim().length == 0){
+            //     alert("PWD를 입력해주세요");
+            //     userPwd.focus();
+            //     return false;
+            // }
+
+            // if(userName.value.trim().length == 0){
+            //     alert("이름을 입력해주세요");
+            //     userName.focus();
+            //     return false;
+            // }
+
+            if(!idCheck()){
+                alert("사용할수 없는 아이디입니다");
+                userId.value = "";
+                userId.focus();
+                return false;
+            }
+            
+            if(userPwd.value != checkPwd.value){
+                alert("비밀번호가 일치하지 않습니다.");
+                checkPwd.value = "";
+                checkPwd.focus();
+                return false;
+            }
+            
+            alert(`${userName.value}님 회원가입에 성공적으로 완료되었습니다 ^ ^`);
+            userId.value ="";
+            userPwd.value ="";
+            userName.value="";
+            checkPwd.value ="";
+            idLabel.innerHTML ="";
+            pwdLabel.innerHTML ="";
+
+
+
+
+            return false;
+        }
+    </script>
+
+</body>
+</html>

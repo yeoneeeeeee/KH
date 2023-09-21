@@ -1,0 +1,5 @@
+package com.kh.springboot.menu.model.typeHandler;
+
+public class MenuTypeHandler {
+
+}

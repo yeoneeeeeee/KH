@@ -1,0 +1,28 @@
+package com.kh.controller;
+
+import com.kh.model.dao.MemberDao;
+import com.kh.model.vo.Member;
+
+/* 
+ * Controller : View를 통해서 요청(request)한 기능을 처리하는 담당
+ *              해당 메소드로 전달된 데이터들을 가공처리(VO 객체로 래핑)한후 Dao메소드 호출시 전달
+ *              Dao로부터 반환받은 결과에 따라 사용자가 보게될 화면을 지정 => 응답(response)
+ * */
+public class MemberController {
+
+	/**
+	 * 사용자의 회원 추가 요청을 처리해주는 메소드
+	 * @param m : 회원의 정보가 담긴 객체
+	 */
+	public void insertMember(Member m) {
+		
+		// 1. 전달받은 userId, userName,userPwd... 정보를 가지고 Member 객체에 담기
+		
+		// 2. Dao의 insertMember 메소드 호출
+		int result = new MemberDao().insertMember(m);
+	}
+	
+}
+
+
+

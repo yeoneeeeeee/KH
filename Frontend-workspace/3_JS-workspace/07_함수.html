@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>함수</title>
+    <link href="resources/css/common.css" rel="stylesheet">
+</head>
+<body>
+    <script>
+        
+    </script>
+    <h1>함수 (funtion)</h1>
+
+    <h3 onclick="test1();">* 선언적 함수</h3>
+    <pre>
+        function 함수명(매개변수 , ...){
+            해당 함수 호출시 실행할 소스코드;
+            
+            return 결과값;
+        }
+        - 매개변수가 없는 경우 생략 가능함
+        - 반환할 값이 없는경우 생략가능 
+    </pre>
+
+    <button onclick="test1();">실행확인</button>
+    <div id="area1" class="area"></div>
+
+    <script>
+        //test1();
+
+        function test1(){
+
+            const area1 = getById("area1");
+            area1.innerHTML += "test()함수 실행<br>";
+        }
+    </script>
+
+    <h3>* 익명 함수</h3>
+    <pre>
+        function(매개변수, 매개변수 , ...){
+            소스코드
+        }
+        특정 변수나 속성에 대입되는 함수 제시시 주로 사용됨(주로 이벤트 핸들러 작성시 사용)
+    </pre>
+
+    <button id="btn2">실행확인</button>
+    <div id="area2" class="area"></div>
+
+    <script>         
+        //sayHi("경민");
+        const btn2 = getById("btn2");
+        const area2 = getById("area2");
+
+        btn2.onclick = function(){ // 이벤트 속성에 대입되는 function == 이벤트 핸들러
+            area2.innerHTML += "이벤트 핸들러를 통해 실행됨<br>"
+        }
+
+        const sayHi = function(name){ // 함수 호이스팅이 발생하지 않음.
+            console.log(`${name}님 안녕하세요?`);
+        }
+        //sayHi("경민");
+
+        function getById(id){//함수 호이스팅(선언적 방식으로 만들어진 함수는 script 최상단으로 먼저 이동함)
+            return document.getElementById(id);
+        }
+    </script>
+    
+    <hr>
+
+    <h2>함수의 매개변수</h2>
+    <button onclick="test3('안녕하세요')">실행</button>
+    <button onclick="test3(10)">실행</button>
+    <button onclick="test3([1,2,3])">실행</button>
+    <button onclick="test3(true)">실행</button>
+    <button onclick="test3(prompt('이름을 입력해'))">실행</button>
+    <!-- 정의해둔 매개변수보다 더 많이 전달하는것은 문제없다. 단, 초과시에 전달된 값으 무시됨. -->
+    <button onclick="test3('안녕','반갑습니다')">실행</button>
+    <button onclick="test3(10,'안녕','반갑습니다')">실행</button>
+    <button onclick="test3()">실행</button>
+
+    <div id="area3" class="area"></div>
+
+    <script>
+        function test3(value = '기본값', ...value2){ // 매개변수 제시시 자료형 지정x, const,let도 제시 x => 변수명만 적음
+            const area3 = getById("area3");
+            area3.innerHTML = value;
+        }
+    </script>    
+
+    <br>
+
+    <h3>* 매개변수 관련 arguments 배열</h3>
+    <p>
+        함수 호출 시 전달되는 값은 내부적으로 arguments 배열에 담김<br>
+        * arguments : 모든 함수마다 내부적으로 하나씩 존재하는 배열객체
+    </p>
+
+    <button onclick="test4(11, 12, 'ㅇㅇ',5);">실행</button>
+    <div id="area4" class="area"></div>
+
+    <script>
+        function test4(){
+            console.log(arguments , arguments[0]);
+
+            // arguments 배열의 모든 정수값을 더해서 area4 안에 출력
+            let sum = 0;
+            let count = 0;
+            for(let i =0; i<arguments.length; i++){
+                if(typeof(arguments[i]) == "number"){
+                    sum += arguments[i];
+                    count++;
+                }
+            }
+
+            const area4 = getById("area4");
+            area4.innerHTML += `총합 : ${sum}<br>`;
+            area4.innerHTML += `평균 : ${sum/count}<br>`;
+            area4.innerHTML += `랜덤값 : ${ran()}<br>`;
+
+            // 총합 : xx <br>
+            // 평균 : xx <br>
+            // 랜덤값 : xx
+        }
+        // 1~ 100사이의 랜덤값을 구해서 반환
+        function ran(){
+            return parseInt(Math.random() * 100 +1);
+        }
+    </script>
+
+    <br>
+
+    <h3>* 매개변수 있는 함수에 this 관련 전달하기 </h3>
+
+    <button onclick="test5(this);">버튼1</button>
+    <button onclick="test5(this.id);" id="btn22">버튼2</button>
+
+    <input type="button" value="버튼3" onclick="test5(this.value);">
+
+    <script>
+        const btn22 = getById("btn22");
+        btn22.click();
+        /*
+            Member m = new Member();
+            m.setUserId("mkm");
+
+            public void setUserId(String userId){
+                this.userId = userId;
+            }        
+        */
+        function test5(value){
+            console.log(value);
+        }
+    </script>
+
+    <hr>
+
+    <h2>함수의 리턴</h2>
+
+    <h3>* 일반적인 값 리턴</h3>
+
+    <button onclick="test6();">실행확인</button>
+    <div id="area6" class="area"></div>
+
+    <script>
+
+        function test6(){            
+            getById("area6").innerHTML += `랜덤값 : ${ran()}<br>`;
+        }
+    </script>
+
+    <h3>* 익명 함수를 리턴하는 함수</h3>
+    이름 : <input type="text" id="userName">
+    <button onclick="test7()();">실행</button>
+
+    <script>
+        function test7(){
+            const name = getById("userName").value;
+
+            return function(){
+                alert(name + "님 환영합니다!!");
+            }
+        }
+    </script>
+
+
+
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body> 
+</html>

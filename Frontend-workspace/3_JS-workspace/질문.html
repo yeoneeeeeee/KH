@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습문제5</title>
+    <style>
+        form{
+            width: 400px;
+        }
+        form div{
+            text-align: center;
+        }
+        .content{
+            width: 400px;
+            height: 100px;
+            background-color: aqua;
+            border: 1px solid blue;
+            display: none;
+            padding-left: 10px;
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Practice5</h1>
+    <form action="test.do">
+        <fieldset>
+            <legend style="text-align: center;">검색할 항목을 선택하세요.</legend>
+            <div>
+                <div>
+                    <input type="radio" class= input1 id="subject" name="ask">
+                    <label for="subject">제목</label>
+                    <input type="radio" class= input1  id="date" name="ask">
+                    <label for="date">날짜</label>
+                    <input type="radio" class= input1  id="name" name="ask">
+                    <label for="name">이름</label>
+                </div>
+            </div>
+            
+        </fieldset>
+    </form>
+
+    <div class=content id="subjectDiv">
+        검색할 제목을 입력하세요 : <br>
+        <input type="text" name="subject"> <button>검색</button>
+    </div>
+    <div class=content id="dateDiv">
+        검색할 날짜를 선택하세요: <br>
+        <input type="date" id="date1"> -
+        <input type="text" id="date2" placeholder="연도-월-일">
+        <button>검색</button>
+    </div>
+    <div class=content id="nameDiv">
+        검색할 작성자 아이디를 입력하세요 : 
+        <input type="text" name="name">
+        <button>검색</button>
+    </div>
+    <script>
+        const date1 = document.getElementById("date1");
+        const date2 = document.getElementById("date2");
+        window.addEventListener('change',()=>{
+            let check = {
+                subject : "subjectDiv",
+                date : dateDiv,
+                name : nameDiv
+            }
+            for(let key in check){
+                const one = document.getElementById(key);
+                const oneValue = document.getElementById(check[key]);
+                if(one.checked){
+                    oneValue.style.display="block";
+                } else {
+                    check[key].style.display="none";
+                }
+            }
+        });
+        date1.addEventListener('change',()=>{
+            date2.value = date1.value;
+        });
+    </script>
+</body>
+</html>

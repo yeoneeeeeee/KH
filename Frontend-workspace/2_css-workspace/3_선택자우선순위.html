@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>    
+    <title>Document</title>
+    <style>
+        h1{ 
+            background-color: pink;
+            color:yellow;
+        }
+        h1{
+            color:red;
+        }
+
+        #id1{
+            background-color: pink;
+        }
+
+        .class1{
+            background-color: yellowgreen !important;
+            color : white;
+        }
+
+        div{
+            background-color: teal !important;
+            color: red;
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>선택자 우선순위</h1>
+    <p>
+        기본적으로 css는 위에서부터 아래로 순차적으로 적용됨<br>
+        동일한 요소를 다양한 선택자로 css가 부여된 경우 우선순위에 따라 적용됨<br>
+        태그선택자 -> 클래스선택자 -> 아이디선택자 -> 인라인스타일방식 -> !important
+        겹치지 않는 스타일의 경우 선택자 운선순위에 상관없이 반영된다. 
+        외부스타일방식 -> 내부스타일방식 -> 인라인스타일방식
+    </p>
+
+    <div id="id1" class="class1" style="background-color: purple; color: blueviolet;">우선순위테스트</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+</body>
+</html>

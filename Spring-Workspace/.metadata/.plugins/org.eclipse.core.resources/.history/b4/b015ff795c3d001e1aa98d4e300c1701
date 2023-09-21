@@ -1,0 +1,7 @@
+package com.kh.springboot.menu.model.vo;
+
+
+@Data
+public class Menu {
+
+}

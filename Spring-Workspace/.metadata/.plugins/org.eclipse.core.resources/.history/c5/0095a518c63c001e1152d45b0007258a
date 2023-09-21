@@ -1,0 +1,6 @@
+package com.kh.springboot;
+
+@Controller
+public class HomeController {
+
+}

@@ -1,0 +1,6 @@
+package com.kh.spring.security.model.service;
+
+@Service
+public class SecurityServiceImpl implements SecurityService{
+
+}

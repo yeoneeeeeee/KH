@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>Practice4</h1>
+
+    <fieldset>
+        <legend>구매 정보</legend>
+        <ul>
+            <li>
+                구매자 : <input type="text" id="buyer" placeholder="구매자의 이름을 입력하세요"/>
+            </li>
+            <li>
+                상품명 : <input type="text" id="pName" placeholder="구매 상품명을 입력하세요"/>
+            </li>
+            <li>
+                가격 : <input type="text" id="price" placeholder="구매가격을 입력하세요"/>                
+            </li>
+            <li>
+                구매 수량 : <input type="number" min="10" max="100" step="10" id="amount" placeholder="최소 10."/>
+            </li>
+            <li>
+                납품 등급 : <input type="range" id="grade" min="1" max="9" step="2" />
+            </li>
+            <li>
+                기타 사항 : <textarea id="etc" rows="4" cols="20"></textarea>
+            </li>
+        </ul>
+    </fieldset>
+    <br><br>
+
+    <button onclick="printValue();">입력 값 출력하기</button>
+
+    <div id="result" style="border : 1px solid black;">
+
+    </div>
+
+    <script>
+        function printValue(){
+            const result = document.getElementById("result");
+
+            let str = "";
+            const buyer = document.getElementById("buyer");
+            const pName = document.getElementById("pName");
+            const price = document.getElementById("price");
+            const amount = document.getElementById("amount");
+            const grade = document.getElementById("grade");
+            const etc = document.getElementById("etc");
+
+            str += `구매자 명 : ${buyer.value}<br>`;
+            str += `상품 명 : ${pName.value}<br>`;
+            str += `가격 : ${price.value}만원<br>`;
+            str += `구매수량 : ${amount.value}개<br>`;
+            str += `납품등급 : ${grade.value}<br>`;
+            str += `기타사항 : ${etc.value}<br>`;
+
+            result.innerHTML = str;
+
+        }
+    </script>
+
+    
+</body>
+</html>

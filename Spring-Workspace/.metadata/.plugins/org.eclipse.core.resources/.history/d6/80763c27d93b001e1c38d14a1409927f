@@ -1,0 +1,9 @@
+package com.kh.spring.security.model.service;
+
+import org.springframework.stereotype.Service;
+
+@Slf4j
+@Service("securityService")
+public class SecurityServiceImpl implements SecurityService{
+
+}

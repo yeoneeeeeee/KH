@@ -1,0 +1,55 @@
+package com.kh.springboot.menu.model.typeHandler;
+
+import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.apache.ibatis.type.BaseTypeHandler;
+import org.apache.ibatis.type.JdbcType;
+
+import com.kh.springboot.menu.model.vo.MenuType;
+
+
+/* 
+ * BaseTypeHandelr?
+ * 	일반적인 자바의 자료형이 아닌 내가직접 커스텀한 데이터 타입을 처리하기위해 사용되는 클래스.
+ *  DB의 특정칼럼에 내가만든 자료형의 값을 대입하고자 할때 사용된다.
+ *  
+ *  MenuType --> varchar2로 변경하고싶다-> setString함수 오버라이딩.
+ *  varchar2 --> MenuType로 반환하고싶다 -> getString함수 오버라이딩
+ * 
+ * 
+ * 
+ * */
+
+
+
+public class MenuTypeHandler extends BaseTypeHandler<MenuType>{
+
+	@Override
+	public void setNonNullParameter(PreparedStatement ps, int i, MenuType parameter, JdbcType jdbcType)
+			throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public MenuType getNullableResult(ResultSet rs, String columnName) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public MenuType getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public MenuType getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

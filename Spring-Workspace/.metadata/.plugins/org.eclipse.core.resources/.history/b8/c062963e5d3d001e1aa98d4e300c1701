@@ -1,0 +1,7 @@
+package com.kh.springboot.menu.model.dao;
+
+
+@Repository
+public class MenuDao {
+
+}

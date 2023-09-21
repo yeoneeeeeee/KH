@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="menu">
+	<select id="selectMenuList" resultMap="menuMap">
+		SELECT 
+			*
+		FROM MENU
+		ORDER BY ID DESC
+	</select>
+	
+	<resultMap type="menu" id="menuMap">
+		<result column="type" property="type" typeHandler="menuTypeHandler"/>
+	</resultMap>
+	
+	<select id="selectMenuListByTypeAndTaste" resultMap="menuMap">
+		SELECT *
+		FROM MENU
+		
+<!-- 		WHERE 1=1  -->
+<!-- 		<if test="type != 'all'"> -->
+<!-- 			AND TYPE = #{type} -->
+<!-- 		</if> -->
+<!-- 		<if test="taste != 'all'"> -->
+<!-- 			AND TASTE = #{taste} -->
+<!-- 		</if> -->
+		
+		ORDER BY ID DESC
+	</select>
+	
+	
+</mapper>

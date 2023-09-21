@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>계산</title>
+    <style>
+        .error{
+            background-color: red;
+            color:white;
+            padding:0;
+            border-width: 3px;
+            border-color:gray;
+            border-style:inset;
+        }
+    </style>
+</head>
+<body>
+    <h1>Practice2</h1>
+    <input type="text" size="8" id="num1">
+    <select id="op">
+        <option>+</option>
+        <option>-</option>
+        <option>*</option>
+        <option>/</option>
+        <option>%</option>
+    </select>
+    <input type="text" size="8" id="num2">
+    <button onclick="test();">=</button>
+    <input type="text" size="8" id="result" readonly>
+
+    <script>
+       
+        // result
+        const result = document.querySelector("#result");
+        function test(){
+            result.className = "";
+             // 연산자   
+            const op = document.querySelector("#op").value;        
+            // num1
+            const num1 = Number(document.querySelector("#num1").value);
+            // num2
+            const num2 = Number(document.querySelector("#num2").value);
+
+            if(num2 == 0 && (op == "/" || op == "%")){
+                result.className = "error";
+                result.value = "연산불가";
+                return;
+            }
+
+            let temp;
+
+            switch(op){ // switch문은 강력 동등비교 => "+" === "+" => 값 + 자료형
+                case "+" : temp = num1+num2;
+                    break;
+                case "-" : temp = num1-num2;
+                    break;
+                case "*" : temp = num1*num2;
+                    break;
+                case "/" : temp = num1/num2;
+                    break;
+                case "%" : temp = num1%num2;
+                    break;
+            }
+            result.value = temp;
+        }
+    </script>
+</body>
+</html>

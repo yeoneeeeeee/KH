@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문자열과 숫자</title>
+    <link href="resources/css/common.css" rel="stylesheet">    
+</head>
+<body>
+   <h1>문자열과 숫자</h1> 
+   <h3>* 문자열 관련 메소드</h3>
+
+   <button onclick="showStringMethod();">문자열 처리 메소드</button>
+
+   <div id="area1" class="area big"></div>
+
+   <script>
+    function showStringMethod(){
+
+        let str1 = "Hello World";
+
+        const area1 = document.getElementById("area1");
+
+        area1.innerHTML = "str1 : "+str1+"<br>";
+        area1.innerHTML += `toUpperCase() : ${str1.toUpperCase()} <br>`;
+        area1.innerHTML += `toLowerCase() : ${str1.toLowerCase()} <br>`;
+        area1.innerHTML += `문자열의 길이 : ${str1.length}<br>`;
+
+        for(let i = 0; i< str1.length; i++){
+            area1.innerHTML += `${i}번째 인덱스 : ${str1.charAt(i)}<br>`;
+        }
+
+        area1.innerHTML += "앞에서부터 첫번째 l의 위치 : "+str1.indexOf("l")+"<br>"
+        area1.innerHTML += "뒤에서부터 첫번째 l의 위치 : "+str1.lastIndexOf("l")+"<br>"
+        area1.innerHTML += "뒤에서부터 첫번째 l의 위치 : "+str1.lastIndexOf("A")+"<br>"
+        // 해당문자가 존재하지 않을겨우 -1을반환
+
+        area1.innerHTML += `substring(시작인덱스) : ${str1.substring(6)}<br>`;
+        area1.innerHTML += `substring(시작, 종료) : ${str1.substring(0,6)}<br>`;
+
+        const str2 = "사과, 바나나, 메론, 복숭아";
+        const fruits = str2.split(", ").join(""); // ["사과"," 바나나"," 메론"," 복숭아"]
+
+        area1.innerHTML += `fruits : ${fruits} <br>`;
+        area1.innerHTML += `fruits의 자료형 : `+typeof(fruits);
+    }
+   </script>
+
+   <h3>* 숫자와 관련된 메소드</h3>
+
+   <button onclick="showMathMethod()">수학 관련 메소드</button>
+
+   <div id="area2" class="area small"></div>
+
+   <script>
+    function showMathMethod(){
+        const area2 = document.getElementById("area2");
+
+        area2.innerHTML += "절대값 : "+Math.abs(-12345)+"<br>";
+        area2.innerHTML += "랜덤값 : "+Math.random()+"<br>"; // 0.0이상 1.0미만의 숫자를 반환
+        area2.innerHTML += `반올림 : ${Math.round(123.567)}<br>`;
+        area2.innerHTML += `버림 : ${Math.floor(123.456)}<br>`;
+        area2.innerHTML += `올림 : ${Math.ceil(123.456)}<br>`;
+        area2.innerHTML += `제곱근 : ${Math.sqrt(9)}<br>`;
+    }
+   </script>
+
+   <hr>
+
+   <h3>* 문자열과 숫자간의 산술연산</h3>
+   <button onclick="arithmetic();">산술연산</button>
+
+   <div id="area3" class="area big"></div>
+
+   <script>
+    function arithmetic(){
+        let test1 = 7 + 7;// 14
+        let test2 = 7 + "7";// 77
+        let test3 = "7"+7; // 77
+        let test4 = 7 + 7 + "7"; // 147
+
+        // 그 외의 산술연산이 가능함.
+        let test5 = "7" * 7;
+        let test6 = "7" - 7;
+        let test7 = "7" / 7;
+        // 문자열이 자동형변환으로 숫자로 변환된뒤 산술연산이 수행된다.(단, 문자열에는 숫자만 존재해야함.)
+
+        let area3 = document.getElementById("area3");
+
+        area3.innerHTML += `test5 : ${test5}<br>`;
+        area3.innerHTML += `test6 : ${test6}<br>`;
+        area3.innerHTML += `test7 : ${test7}<br>`;
+
+        // 강제형변환(문자열 => 숫자형)
+        // Number(문자열)
+        // parseInt(문자열)
+        // parseFloat(문자열)
+
+        let iNum = 2; //숫자
+
+        let sNum = "3"; // 문자열
+
+        let test8 = iNum +sNum; // 2 +"3" => 23
+        let test9 = iNum + Number(sNum);
+        let test10 = iNum + parseInt(sNum);
+        let test11 = iNum + parseFloat(sNum);
+        
+        area3.innerHTML += `test9 : ${test9}<br>`;
+        area3.innerHTML += `test10 : ${test10}<br>`;
+        area3.innerHTML += `test11 : ${test11}<br>`;
+
+        let fNum = "1.234";
+
+        let test12 = iNum + Number(fNum);
+        let test13 = iNum + parseInt(fNum);
+        let test14 = iNum + parseFloat(fNum);
+        let test15 = iNum + fNum * 1;
+
+        area3.innerHTML += `test12 : ${test12}<br>`;
+        area3.innerHTML += `test13 : ${test13}<br>`;
+        area3.innerHTML += `test14 : ${test14}<br>`;
+        area3.innerHTML += `test15 : ${test15}<br>`;
+    }
+   </script>
+
+    <hr>
+
+    정수1 : <input type="number" id="num1"> <br>
+    정수2 : <input type="number" id="num2" value=""> <br>
+
+   <label id="result"></label> <br>
+   <input type="text" id="result2">
+   <button onclick="plus();">덧셈</button>
+
+   <script>
+    function plus(){
+        const num1 = document.getElementById("num1").value*1; // "10"
+        const num2 = document.getElementById("num2").value*1; // "20"
+
+        document.getElementById("result").innerHTML = "결과 : "+(num1+num2);
+        document.getElementById("result2").value = "결과 : "+(num1+num2);
+    }
+
+   </script>
+
+   <br><br><br><br><br><br><br><br>
+   <br><br><br><br><br><br><br><br><br><br><br><br>
+   <br><br><br><br><br>
+
+
+
+
+
+
+
+
+</body>
+</html>

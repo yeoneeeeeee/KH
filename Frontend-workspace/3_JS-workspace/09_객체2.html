@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>객체2</title>
+    <link href="resources/css/common.css" rel="stylesheet">
+</head>
+<body>
+    <h1>객체2</h1>
+    <h3>* 객체배열을 사용한 다량의 데이터 관리</h3>
+
+    <script>
+        function get(id){
+            return document.getElementById(id);
+        }
+    </script>
+    <button onclick="test1()">실행확인</button>
+    <div id="area1" class="area"></div>
+
+    <script>
+        function test1(){
+            const student0 = {name : "김갑생", java:100 , oracle : 90, html:90, css :60};
+            const student1 = {name : "김말똥", java:10 , oracle : 100, html:80, css :80};
+            const student2 = {name : "홍길동", java:70 , oracle : 60, html:50, css :20};
+            const student3 = {name : "민경민", java:100 , oracle : 100, html:100, css :90};
+
+            const students = [];
+            students.push(student0, student1, student2, student3);
+
+            console.log(students);
+
+            for(let student of students){
+                student.javascript = 100;
+                student.getSum = function(){
+                    return this.java + this.oracle + this.html+ this.css + this.javascript;
+                };
+                student.getAvg = function(){
+                    return this.getSum() / 5;
+                };
+            }
+
+            console.log(students , student0);
+
+            const area1 = get("area1");
+
+            for(let student of students){
+                with(student){
+                    area1.innerHTML +="  이름 : "   +  name
+                                    + ", 총점 : " + getSum()
+                                    + ", 평균 : " + getAvg()+"<br>";
+                }
+            }
+
+        }
+
+
+
+    </script>
+
+    <hr>
+
+    <h3>* 생성자 함수</h3>
+
+    <p>
+        new 키워드를 사용해서 객체를 생성할 수 있는 함수를 생성자 함수라고 부른다. 
+        (함수명 제시시 첫글자를 대문자로하는게 관례)
+    </p>
+
+    <button onclick="test2();">실행확인</button>
+    <div id="area2" class="area"></div>
+
+    <script>
+        function test2(){
+            const student0 = new Student("민경민",100,90,80,70,60);
+            const student1 = new Student("민경민2",100,90,80,70,60);
+            const student2 = new Student("민경민3",100,90,80,70,60);
+            //const student1 = Student("민경민",100,90,80,70,60);// new가 없으면 반환되는 값이 없다.
+            console.log(student0);
+            console.log(student1);
+            
+            [student0, student1, student2].forEach(  function (item){
+                get("area2").innerHTML += item+"<br>";
+            })
+
+        }
+
+        //생성자 함수로 초기화 가능
+        function Student(name, java, oracle, html, css, javascript){
+            // this = {}
+            console.log(this);
+
+            this.name = name;
+            this.java = java;
+            this.oracle = oracle;
+            this.html = html;
+            this.css = css;
+            this.javascript = javascript;
+
+            //메소드 속성 정의
+            this.getSum = function(){
+                return this.java + this.oracle + this.html + this.css +this.javascript;
+            }
+
+            this.getAvg = function(){
+                return this.getSum() / 5;
+            }
+
+            this.toString = function(){
+                return `이름 : ${this.name}, 총점 : ${this.getSum()} , 평균 : ${this.getAvg()}<br>`;
+            }
+
+            // return this
+        }
+    </script>
+
+    <hr>
+
+    <h3>* Date 내장객체</h3>
+
+    <button onclick="test3();">실행확인</button>
+    <div id="area3" class="area"></div>
+
+    <script>
+        function test3(){
+            const area3 = get("area3");
+
+            const date1 = new Date(); // 현재 날짜 및 시간
+            
+            // 2023년 5월 11일로 셋팅
+            const date2 = new Date(2023, 5-1, 11);
+
+            area3.innerHTML += "Date() : "+date1+"<br>";
+            area3.innerHTML += "Date(년, 월, 일) : "+date2+"<br>";
+
+            // 년도만 알아내고 싶다면
+            area3.innerHTML += `년도 : ${date1.getFullYear()}<br>`;
+            // 월만 알아내고싶다
+            area3.innerHTML += `월 : ${date1.getMonth()+1}<br>`;
+            // 일만, 요일만 알아내고 싶다면
+            area3.innerHTML += `일 : ${date1.getDate()}<br>`;
+            area3.innerHTML += `요일 : ${date1.getDay()}<br>`;
+
+            // 종강일 디데이 구하기
+            // 2023 9 19
+            const end = new Date(2023, 8 , 19);// 2023년 9월 19일
+            const now = new Date();
+            area3.innerHTML += "종강일 디데이 : "+ (end - now) +"<br>";
+            // 1000ms = 1s
+            // 60s = 1m
+            // 60m = 1h
+            // 24h = 1d
+            const dday = (end-now) / (1000* 60 * 60 * 24);
+            area3.innerHTML += "종강일 디데이 : "+ Math.ceil(dday) +"<br>";
+        }
+
+        let a = "1";
+
+        let [b,c,d,e] = [1 , 2, 4, function(){console.log("테스트")}];
+        console.log(b,c,d,e());
+
+        let {...h} = {f: "fff", g:"ggg", h : "hhh"};
+        
+    </script>
+    <br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>

@@ -1,0 +1,43 @@
+* {
+
+margin: 0px;
+
+padding: 0px;
+
+box-sizing: border-box;
+
+}
+
+nav {
+
+overflow: hidden;
+
+}
+
+nav li {
+
+float: left;
+
+width: 50%;
+
+list-style-type: none;
+
+}
+
+.container {
+
+width: 400px;
+
+margin: auto;
+
+text-align: center;
+
+border: 1px solid black;
+
+}
+
+.container table {
+
+width: 100%;
+
+}

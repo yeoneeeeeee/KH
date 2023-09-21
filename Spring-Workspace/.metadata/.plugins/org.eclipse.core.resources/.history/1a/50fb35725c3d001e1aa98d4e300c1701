@@ -1,0 +1,5 @@
+package com.kh.springboot.menu.model.vo;
+
+public class Menu {
+
+}

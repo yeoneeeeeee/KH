@@ -1,0 +1,4 @@
+#context-path
+server.servlet.context-path=/springboot
+
+#port

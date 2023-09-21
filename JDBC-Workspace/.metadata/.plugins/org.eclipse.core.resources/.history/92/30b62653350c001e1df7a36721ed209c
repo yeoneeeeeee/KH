@@ -1,0 +1,3 @@
+username=JDBC
+password=JDBC
+driver=oracle.jdbc.driver.OracleDriver
